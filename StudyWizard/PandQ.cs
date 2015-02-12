@@ -19,6 +19,9 @@ namespace StudyWizard
         StreamReader srf;
         public int numberOfPlaylists = 0;
 
+        /// <summary>
+        /// Loads a selected text file.
+        /// </summary>
         public void loadPandQ()
         {
             string tempQuestion = "";
@@ -86,6 +89,13 @@ namespace StudyWizard
 
         }
 
+        /// <summary>
+        /// Changes the properties of a specific playlist, specified by the index of the playlist name in the playlistNames BindingList
+        /// </summary>
+        /// <param name="selectedPlaylist">index of the playlist name in the playlistNames BindingList</param>
+        /// <param name="name">New Playlist Names</param>
+        /// <param name="subject">New Playlist Subject</param>
+        /// <param name="section">New Playtlist Section(s)</param>
         public void savePlaylist(int selectedPlaylist, string name, string subject, string section)
         {
             srf.Close();
@@ -118,6 +128,12 @@ namespace StudyWizard
             }
         }
 
+        /// <summary>
+        /// Appends a playlist to the text file, as well as adds it to the playlist lists(playlistNames, playlistSubjects, playlistSections).
+        /// </summary>
+        /// <param name="name">Playlist Name</param>
+        /// <param name="subject">Playlist Subject</param>
+        /// <param name="section">Playlist Section(s)</param>
         public void savePlaylist(string name, string subject, string section)
         {
             srf.Close();
@@ -139,6 +155,10 @@ namespace StudyWizard
             }
         }
 
+        /// <summary>
+        /// Removes a specific playlist, specified by the index of the playlist name in the playlistNames BindingList.
+        /// </summary>
+        /// <param name="playlistIndex">index of the playlist name in the playlistNames BindingList</param>
         public void deletePlaylist(int playlistIndex)
         {
             numberOfPlaylists--;
@@ -169,6 +189,10 @@ namespace StudyWizard
             playlistSections.RemoveAt(playlistIndex);
         }
 
+        /// <summary>
+        /// Returns an array that hold the question, the answer, and a blank space for each question.
+        /// </summary>
+        /// <returns>Questions and answers</returns>
         public string[] viewAllQuestions()
         {
             string[] returnString = new string[(questions.Count) * 3];
@@ -179,6 +203,53 @@ namespace StudyWizard
                 returnString[i + 2] = "";
             }
             return returnString;
+        }
+
+        /// <summary>
+        /// Appends a question to the text file, as well as adds a new Questions object to the questions list.
+        /// </summary>
+        /// <param name="newQuestion">New Question</param>
+        /// <param name="newSubject">New Question Subject</param>
+        /// <param name="newSections">New Question Section(s)</param>
+        /// <param name="newAnswer1">New Question Answer</param>
+        /// <param name="newAnswer2">New Question Answer</param>
+        /// <param name="newAnswer3">New Question Answer</param>
+        /// <param name="newAnswer4">New Question Answer</param>
+        /// <param name="newCorrectAnswer">New Question Correct Answer</param>
+        /// <param name="newExplanation">New Question Explanation</param>
+        public void addQuestion(string newQuestion, string newSubject, string newSections, string newAnswer1, string newAnswer2, string newAnswer3, string newAnswer4, int newCorrectAnswer, string newExplanation)
+        {
+            srf.Close();
+            srf.Dispose();
+            string[] lines = File.ReadAllLines(file);
+            List<string> tempAnswers = new List<string>();
+            tempAnswers.Add(newAnswer1); tempAnswers.Add(newAnswer2); tempAnswers.Add(newAnswer3); tempAnswers.Add(newAnswer4);
+            using (StreamWriter savefile = new StreamWriter(file))
+            {
+                foreach (string line in lines)
+                {
+                    savefile.WriteLine(line);
+                }
+                questions.Add(new Questions
+                {
+                    question = newQuestion,
+                    subject = newSubject,
+                    sections = newSections,
+                    answers = tempAnswers,
+                    correctAnswer = newCorrectAnswer,
+                    explanation = newExplanation
+                });
+                savefile.WriteLine("Q:" + newQuestion);
+                savefile.WriteLine("B:" + newSubject);
+                savefile.WriteLine("C:" + newSections);
+                savefile.WriteLine("A:" + newAnswer1);
+                savefile.WriteLine("A:" + newAnswer2);
+                savefile.WriteLine("A:" + newAnswer3);
+                savefile.WriteLine("A:" + newAnswer4);
+                savefile.WriteLine("R:" + newCorrectAnswer);
+                savefile.WriteLine("_:" + newExplanation);
+                savefile.WriteLine("|");
+            }
         }
     }
 

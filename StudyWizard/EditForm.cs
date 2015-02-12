@@ -12,7 +12,7 @@ namespace StudyWizard
 {
     public partial class EditForm : Form
     {
-        OpeningForm openingform = new OpeningForm();
+        OpeningForm openingForm = new OpeningForm();
         PandQ pandQ = new PandQ();
         int selectedPlaylist;
         bool newPlaylist;
@@ -20,14 +20,14 @@ namespace StudyWizard
         public EditForm(OpeningForm myOpeningForm, PandQ myPandQ)
         {
             InitializeComponent();
-            openingform = myOpeningForm;
+            openingForm = myOpeningForm;
             pandQ = myPandQ;
             newPlaylist = true;
         }
         public EditForm(OpeningForm myOpeningForm, PandQ myPandQ, int mySelectedPlaylist)
         {
             InitializeComponent();
-            openingform = myOpeningForm;
+            openingForm = myOpeningForm;
             pandQ = myPandQ;
             selectedPlaylist = mySelectedPlaylist;
             txtBox_playlistName.Text = pandQ.playlistNames[selectedPlaylist];
@@ -43,7 +43,7 @@ namespace StudyWizard
             if (dialogResult == DialogResult.Yes)
             {
                 this.Close();
-                SelectEditForm selectEditForm = new SelectEditForm(openingform, pandQ);
+                SelectEditForm selectEditForm = new SelectEditForm(openingForm, pandQ);
                 selectEditForm.Show();
             }
         }
@@ -58,7 +58,7 @@ namespace StudyWizard
             {
                 pandQ.savePlaylist(selectedPlaylist, txtBox_playlistName.Text, txtBox_subject.Text, txtBox_chapters.Text);
             }
-            SelectEditForm selectEditForm = new SelectEditForm(openingform, pandQ);
+            SelectEditForm selectEditForm = new SelectEditForm(openingForm, pandQ);
             selectEditForm.Show();
             this.Close();
         }
