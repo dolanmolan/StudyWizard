@@ -15,23 +15,20 @@ namespace StudyWizard
     {
         OpeningForm openingForm = new OpeningForm();
         PandQ pandQ = new PandQ();
-        Questions questions = new Questions();
 
-        public SelectEditForm() { }
-        public SelectEditForm(OpeningForm myOpeningForm, PandQ myPlaylist, Questions myQuestions)
+        public SelectEditForm(OpeningForm myOpeningForm, PandQ myPlaylist)
         {
             InitializeComponent();
             openingForm = myOpeningForm;
             pandQ = myPlaylist;
-            questions = myQuestions;
             lsbx_EditListBox.DataSource = pandQ.playlistNames;
         }
 
         private void btn_edit_Click(object sender, EventArgs e)
         {
-            EditForm editForm = new EditForm(openingForm, this, pandQ, questions, lsbx_EditListBox.SelectedIndex);
+            EditForm editForm = new EditForm(openingForm, pandQ, lsbx_EditListBox.SelectedIndex);
             editForm.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void btn_back_Click(object sender, EventArgs e)
@@ -43,11 +40,15 @@ namespace StudyWizard
         private void btn_delete_Click(object sender, EventArgs e)
         {
 
+            pandQ.deletePlaylist(lsbx_EditListBox.SelectedIndex);
+            lsbx_EditListBox.ClearSelected();
         }
 
         private void btn_viewAll_Click(object sender, EventArgs e)
         {
-
+            ViewAllQuestionsForm viewAllQuestionsForm = new ViewAllQuestionsForm(openingForm, pandQ);
+            viewAllQuestionsForm.Show();
+            this.Close();
         }
 
         private void btn_addQuestion_Click(object sender, EventArgs e)
@@ -57,7 +58,9 @@ namespace StudyWizard
 
         private void btn_new_Click(object sender, EventArgs e)
         {
-
+            EditForm editForm = new EditForm(openingForm, pandQ);
+            editForm.Show();
+            this.Close();
         }
     }
 }

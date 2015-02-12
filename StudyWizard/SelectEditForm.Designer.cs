@@ -39,7 +39,9 @@
             // 
             // lsbx_EditListBox
             // 
+            this.lsbx_EditListBox.AllowDrop = true;
             this.lsbx_EditListBox.FormattingEnabled = true;
+            this.lsbx_EditListBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lsbx_EditListBox.Location = new System.Drawing.Point(12, 11);
             this.lsbx_EditListBox.Name = "lsbx_EditListBox";
             this.lsbx_EditListBox.Size = new System.Drawing.Size(129, 238);
@@ -60,7 +62,7 @@
             this.btn_edit.Location = new System.Drawing.Point(173, 227);
             this.btn_edit.Name = "btn_edit";
             this.btn_edit.Size = new System.Drawing.Size(99, 23);
-            this.btn_edit.TabIndex = 2;
+            this.btn_edit.TabIndex = 5;
             this.btn_edit.Text = "Edit";
             this.btn_edit.UseVisualStyleBackColor = true;
             this.btn_edit.Click += new System.EventHandler(this.btn_edit_Click);
@@ -70,7 +72,7 @@
             this.btn_addQuestion.Location = new System.Drawing.Point(173, 70);
             this.btn_addQuestion.Name = "btn_addQuestion";
             this.btn_addQuestion.Size = new System.Drawing.Size(99, 23);
-            this.btn_addQuestion.TabIndex = 3;
+            this.btn_addQuestion.TabIndex = 2;
             this.btn_addQuestion.Text = "Add Questions";
             this.btn_addQuestion.UseVisualStyleBackColor = true;
             this.btn_addQuestion.Click += new System.EventHandler(this.btn_addQuestion_Click);
@@ -80,7 +82,7 @@
             this.btn_viewAll.Location = new System.Drawing.Point(173, 99);
             this.btn_viewAll.Name = "btn_viewAll";
             this.btn_viewAll.Size = new System.Drawing.Size(99, 23);
-            this.btn_viewAll.TabIndex = 4;
+            this.btn_viewAll.TabIndex = 3;
             this.btn_viewAll.Text = "View all questions";
             this.btn_viewAll.UseVisualStyleBackColor = true;
             this.btn_viewAll.Click += new System.EventHandler(this.btn_viewAll_Click);
@@ -90,17 +92,18 @@
             this.btn_delete.Location = new System.Drawing.Point(173, 198);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(99, 23);
-            this.btn_delete.TabIndex = 5;
+            this.btn_delete.TabIndex = 4;
             this.btn_delete.Text = "Delete";
             this.btn_delete.UseVisualStyleBackColor = true;
             this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // btn_back
             // 
+            this.btn_back.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_back.Location = new System.Drawing.Point(173, 12);
             this.btn_back.Name = "btn_back";
             this.btn_back.Size = new System.Drawing.Size(99, 23);
-            this.btn_back.TabIndex = 6;
+            this.btn_back.TabIndex = 0;
             this.btn_back.Text = "Back";
             this.btn_back.UseVisualStyleBackColor = true;
             this.btn_back.Click += new System.EventHandler(this.btn_back_Click);
@@ -109,6 +112,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btn_back;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.ControlBox = false;
             this.Controls.Add(this.btn_back);
@@ -126,13 +130,13 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox lsbx_EditListBox;
         private System.Windows.Forms.Button btn_new;
         private System.Windows.Forms.Button btn_edit;
         private System.Windows.Forms.Button btn_addQuestion;
         private System.Windows.Forms.Button btn_viewAll;
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Button btn_back;
+        public System.Windows.Forms.ListBox lsbx_EditListBox;
 
     }
 }

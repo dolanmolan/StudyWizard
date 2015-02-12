@@ -13,22 +13,27 @@ namespace StudyWizard
     public partial class EditForm : Form
     {
         OpeningForm openingform = new OpeningForm();
-        SelectEditForm selectEditForm = new SelectEditForm();
         PandQ pandQ = new PandQ();
-        Questions questions = new Questions();
         int selectedPlaylist;
+        bool newPlaylist;
 
-        public EditForm(OpeningForm myOpeningForm, SelectEditForm mySelectEditForm, PandQ myPandQ, Questions myQuestions, int mySelectedPlaylist)
+        public EditForm(OpeningForm myOpeningForm, PandQ myPandQ)
         {
             InitializeComponent();
             openingform = myOpeningForm;
-            selectEditForm = mySelectEditForm;
             pandQ = myPandQ;
-            questions = myQuestions;
+            newPlaylist = true;
+        }
+        public EditForm(OpeningForm myOpeningForm, PandQ myPandQ, int mySelectedPlaylist)
+        {
+            InitializeComponent();
+            openingform = myOpeningForm;
+            pandQ = myPandQ;
             selectedPlaylist = mySelectedPlaylist;
             txtBox_playlistName.Text = pandQ.playlistNames[selectedPlaylist];
             txtBox_subject.Text = pandQ.playlistSubjects[selectedPlaylist];
             txtBox_chapters.Text = pandQ.playlistSections[selectedPlaylist];
+            newPlaylist = false;
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
@@ -38,13 +43,22 @@ namespace StudyWizard
             if (dialogResult == DialogResult.Yes)
             {
                 this.Close();
+                SelectEditForm selectEditForm = new SelectEditForm(openingform, pandQ);
                 selectEditForm.Show();
             }
         }
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            pandQ.savePlaylist(selectedPlaylist, txtBox_playlistName.Text, txtBox_subject.Text, txtBox_chapters.Text);
+            if (newPlaylist)
+            {
+                pandQ.savePlaylist(txtBox_playlistName.Text, txtBox_subject.Text, txtBox_chapters.Text);
+            }
+            else
+            {
+                pandQ.savePlaylist(selectedPlaylist, txtBox_playlistName.Text, txtBox_subject.Text, txtBox_chapters.Text);
+            }
+            SelectEditForm selectEditForm = new SelectEditForm(openingform, pandQ);
             selectEditForm.Show();
             this.Close();
         }

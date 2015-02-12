@@ -63,10 +63,11 @@
             this.btn_study.TabIndex = 2;
             this.btn_study.Text = "Study!";
             this.btn_study.UseVisualStyleBackColor = true;
-            this.btn_study.Click += new System.EventHandler(this.button1_Click);
+            this.btn_study.Click += new System.EventHandler(this.btn_study_Click);
             // 
             // btn_close
             // 
+            this.btn_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_close.Location = new System.Drawing.Point(12, 226);
             this.btn_close.Name = "btn_close";
             this.btn_close.Size = new System.Drawing.Size(260, 23);
@@ -80,15 +81,17 @@
             this.btn_load.Location = new System.Drawing.Point(12, 168);
             this.btn_load.Name = "btn_load";
             this.btn_load.Size = new System.Drawing.Size(260, 23);
-            this.btn_load.TabIndex = 4;
+            this.btn_load.TabIndex = 0;
             this.btn_load.Text = "Load File";
             this.btn_load.UseVisualStyleBackColor = true;
             this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
             // 
             // OpeningForm
             // 
+            this.AcceptButton = this.btn_study;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btn_close;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.ControlBox = false;
             this.Controls.Add(this.btn_load);

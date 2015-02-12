@@ -12,3 +12,4 @@ C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj
 C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.csproj.GenerateResource.Cache
 C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.exe
 C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.pdb
+C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.ViewAllQuestionsForm.resources

@@ -53,7 +53,7 @@
             this.txtBox_playlistName.Location = new System.Drawing.Point(125, 9);
             this.txtBox_playlistName.Name = "txtBox_playlistName";
             this.txtBox_playlistName.Size = new System.Drawing.Size(249, 20);
-            this.txtBox_playlistName.TabIndex = 1;
+            this.txtBox_playlistName.TabIndex = 0;
             // 
             // lbl_Subject
             // 
@@ -80,14 +80,14 @@
             this.txtBox_chapters.Location = new System.Drawing.Point(96, 62);
             this.txtBox_chapters.Name = "txtBox_chapters";
             this.txtBox_chapters.Size = new System.Drawing.Size(278, 20);
-            this.txtBox_chapters.TabIndex = 5;
+            this.txtBox_chapters.TabIndex = 2;
             // 
             // btn_save
             // 
             this.btn_save.Location = new System.Drawing.Point(299, 103);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(75, 23);
-            this.btn_save.TabIndex = 7;
+            this.btn_save.TabIndex = 4;
             this.btn_save.Text = "Save";
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
@@ -97,7 +97,7 @@
             this.btn_cancel.Location = new System.Drawing.Point(218, 103);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(75, 23);
-            this.btn_cancel.TabIndex = 8;
+            this.btn_cancel.TabIndex = 3;
             this.btn_cancel.Text = "Cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
@@ -107,12 +107,14 @@
             this.txtBox_subject.Location = new System.Drawing.Point(85, 36);
             this.txtBox_subject.Name = "txtBox_subject";
             this.txtBox_subject.Size = new System.Drawing.Size(289, 20);
-            this.txtBox_subject.TabIndex = 9;
+            this.txtBox_subject.TabIndex = 1;
             // 
             // EditForm
             // 
+            this.AcceptButton = this.btn_save;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btn_cancel;
             this.ClientSize = new System.Drawing.Size(386, 138);
             this.ControlBox = false;
             this.Controls.Add(this.txtBox_subject);

@@ -22,7 +22,7 @@ namespace StudyWizard
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btn_study_Click(object sender, EventArgs e)
         {
             SelectStudyForm selectStudyForm = new SelectStudyForm(this, pandQ, questions);
             selectStudyForm.Show();
@@ -31,7 +31,7 @@ namespace StudyWizard
 
         public void btn_edit_Click(object sender, EventArgs e)
         {
-            SelectEditForm selectEditForm = new SelectEditForm(this, pandQ, questions);
+            SelectEditForm selectEditForm = new SelectEditForm(this, pandQ);
             selectEditForm.Show();
             this.Hide();
         }
