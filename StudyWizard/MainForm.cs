@@ -11,13 +11,13 @@ using System.IO;
 
 namespace StudyWizard
 {
-    public partial class OpeningForm : Form
+    public partial class MainForm : Form
     {
         OpenFileDialog openFileDialog = new OpenFileDialog();
         PandQ pandQ = new PandQ();
         Questions questions = new Questions();
         
-        public OpeningForm()
+        public MainForm()
         {
             InitializeComponent();
         }

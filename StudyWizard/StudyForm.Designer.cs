@@ -55,7 +55,7 @@
             this.rdoBtn_answer1.Location = new System.Drawing.Point(12, 80);
             this.rdoBtn_answer1.Name = "rdoBtn_answer1";
             this.rdoBtn_answer1.Size = new System.Drawing.Size(14, 13);
-            this.rdoBtn_answer1.TabIndex = 0;
+            this.rdoBtn_answer1.TabIndex = 1;
             this.rdoBtn_answer1.TabStop = true;
             this.rdoBtn_answer1.UseVisualStyleBackColor = true;
             // 
@@ -66,7 +66,7 @@
             this.rdoBtn_answer2.Location = new System.Drawing.Point(12, 125);
             this.rdoBtn_answer2.Name = "rdoBtn_answer2";
             this.rdoBtn_answer2.Size = new System.Drawing.Size(14, 13);
-            this.rdoBtn_answer2.TabIndex = 1;
+            this.rdoBtn_answer2.TabIndex = 2;
             this.rdoBtn_answer2.TabStop = true;
             this.rdoBtn_answer2.UseVisualStyleBackColor = true;
             // 
@@ -77,7 +77,7 @@
             this.rdoBtn_answer3.Location = new System.Drawing.Point(12, 170);
             this.rdoBtn_answer3.Name = "rdoBtn_answer3";
             this.rdoBtn_answer3.Size = new System.Drawing.Size(14, 13);
-            this.rdoBtn_answer3.TabIndex = 2;
+            this.rdoBtn_answer3.TabIndex = 3;
             this.rdoBtn_answer3.TabStop = true;
             this.rdoBtn_answer3.UseVisualStyleBackColor = true;
             // 
@@ -88,7 +88,7 @@
             this.rdoBtn_answer4.Location = new System.Drawing.Point(12, 215);
             this.rdoBtn_answer4.Name = "rdoBtn_answer4";
             this.rdoBtn_answer4.Size = new System.Drawing.Size(14, 13);
-            this.rdoBtn_answer4.TabIndex = 3;
+            this.rdoBtn_answer4.TabIndex = 4;
             this.rdoBtn_answer4.TabStop = true;
             this.rdoBtn_answer4.UseVisualStyleBackColor = true;
             // 
@@ -99,7 +99,7 @@
             this.btn_quit.Location = new System.Drawing.Point(12, 272);
             this.btn_quit.Name = "btn_quit";
             this.btn_quit.Size = new System.Drawing.Size(85, 28);
-            this.btn_quit.TabIndex = 4;
+            this.btn_quit.TabIndex = 5;
             this.btn_quit.Text = "Quit";
             this.btn_quit.UseVisualStyleBackColor = true;
             this.btn_quit.Click += new System.EventHandler(this.btn_quit_Click);
@@ -110,9 +110,10 @@
             this.btn_submit.Location = new System.Drawing.Point(527, 272);
             this.btn_submit.Name = "btn_submit";
             this.btn_submit.Size = new System.Drawing.Size(85, 28);
-            this.btn_submit.TabIndex = 5;
+            this.btn_submit.TabIndex = 6;
             this.btn_submit.Text = "Submit";
             this.btn_submit.UseVisualStyleBackColor = true;
+            this.btn_submit.Click += new System.EventHandler(this.btn_submit_Click);
             // 
             // StudyForm
             // 

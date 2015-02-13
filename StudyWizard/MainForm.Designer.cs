@@ -1,6 +1,6 @@
 ﻿namespace StudyWizard
 {
-    partial class OpeningForm
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label1 = new System.Windows.Forms.Label();
             this.btn_edit = new System.Windows.Forms.Button();
             this.btn_study = new System.Windows.Forms.Button();
@@ -38,8 +39,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Location = new System.Drawing.Point(13, 140);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(259, 25);
             this.label1.TabIndex = 0;
@@ -91,6 +93,7 @@
             this.AcceptButton = this.btn_study;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.CancelButton = this.btn_close;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.ControlBox = false;

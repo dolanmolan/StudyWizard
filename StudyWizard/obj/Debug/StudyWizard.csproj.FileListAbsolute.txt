@@ -5,7 +5,6 @@ C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj
 C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.AddQuestionForm.resources
 C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.EditForm.resources
 C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.SelectEditForm.resources
-C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.OpeningForm.resources
 C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.Properties.Resources.resources
 C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.SelectStudyForm.resources
 C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.StudyForm.resources
@@ -13,3 +12,4 @@ C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj
 C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.exe
 C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.pdb
 C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.ViewAllQuestionsForm.resources
+C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.MainForm.resources

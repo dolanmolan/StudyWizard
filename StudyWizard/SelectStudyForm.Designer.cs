@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lsBx_StudyListBox = new System.Windows.Forms.ListBox();
+            this.lsbx_StudyListBox = new System.Windows.Forms.ListBox();
             this.btn_study = new System.Windows.Forms.Button();
             this.btn_back = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // lsBx_StudyListBox
+            // lsbx_StudyListBox
             // 
-            this.lsBx_StudyListBox.FormattingEnabled = true;
-            this.lsBx_StudyListBox.Location = new System.Drawing.Point(12, 12);
-            this.lsBx_StudyListBox.Name = "lsBx_StudyListBox";
-            this.lsBx_StudyListBox.Size = new System.Drawing.Size(129, 238);
-            this.lsBx_StudyListBox.TabIndex = 0;
+            this.lsbx_StudyListBox.FormattingEnabled = true;
+            this.lsbx_StudyListBox.Location = new System.Drawing.Point(12, 12);
+            this.lsbx_StudyListBox.Name = "lsbx_StudyListBox";
+            this.lsbx_StudyListBox.Size = new System.Drawing.Size(129, 238);
+            this.lsbx_StudyListBox.TabIndex = 0;
             // 
             // btn_study
             // 
@@ -53,6 +53,7 @@
             // 
             // btn_back
             // 
+            this.btn_back.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_back.Location = new System.Drawing.Point(173, 12);
             this.btn_back.Name = "btn_back";
             this.btn_back.Size = new System.Drawing.Size(99, 23);
@@ -71,7 +72,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.btn_back);
             this.Controls.Add(this.btn_study);
-            this.Controls.Add(this.lsBx_StudyListBox);
+            this.Controls.Add(this.lsbx_StudyListBox);
             this.Name = "SelectStudyForm";
             this.Text = "Choose a playlist";
             this.ResumeLayout(false);
@@ -80,7 +81,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox lsBx_StudyListBox;
+        private System.Windows.Forms.ListBox lsbx_StudyListBox;
         private System.Windows.Forms.Button btn_study;
         private System.Windows.Forms.Button btn_back;
     }

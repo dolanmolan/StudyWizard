@@ -12,20 +12,20 @@ namespace StudyWizard
 {
     public partial class ViewAllQuestionsForm : Form
     {
-        OpeningForm openingForm = new OpeningForm();
+        MainForm mainForm = new MainForm();
         PandQ pandQ = new PandQ();
 
-        public ViewAllQuestionsForm(OpeningForm myOpeningForm, PandQ myPlaylist)
+        public ViewAllQuestionsForm(MainForm myMainForm, PandQ myPlaylist)
         {
             InitializeComponent();
-            openingForm = myOpeningForm;
+            mainForm = myMainForm;
             pandQ = myPlaylist;
             txtBox_Questions.Lines = pandQ.viewAllQuestions();
         }
 
         private void btn_back_Click(object sender, EventArgs e)
         {
-            SelectEditForm selectEditForm = new SelectEditForm(openingForm, pandQ);
+            SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ);
             selectEditForm.Show();
             this.Close();
         }

@@ -16,7 +16,7 @@ namespace StudyWizard
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new OpeningForm());
+            Application.Run(new MainForm());
         }
     }
 }

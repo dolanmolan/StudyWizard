@@ -32,7 +32,7 @@
             this.txtBox_playlistName = new System.Windows.Forms.TextBox();
             this.lbl_Subject = new System.Windows.Forms.Label();
             this.lbl_chapters = new System.Windows.Forms.Label();
-            this.txtBox_chapters = new System.Windows.Forms.TextBox();
+            this.txtBox_Sections = new System.Windows.Forms.TextBox();
             this.btn_save = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.txtBox_subject = new System.Windows.Forms.TextBox();
@@ -71,16 +71,16 @@
             this.lbl_chapters.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_chapters.Location = new System.Drawing.Point(12, 62);
             this.lbl_chapters.Name = "lbl_chapters";
-            this.lbl_chapters.Size = new System.Drawing.Size(78, 20);
+            this.lbl_chapters.Size = new System.Drawing.Size(75, 20);
             this.lbl_chapters.TabIndex = 4;
-            this.lbl_chapters.Text = "Chapters:";
+            this.lbl_chapters.Text = "Sections:";
             // 
-            // txtBox_chapters
+            // txtBox_Sections
             // 
-            this.txtBox_chapters.Location = new System.Drawing.Point(96, 62);
-            this.txtBox_chapters.Name = "txtBox_chapters";
-            this.txtBox_chapters.Size = new System.Drawing.Size(278, 20);
-            this.txtBox_chapters.TabIndex = 2;
+            this.txtBox_Sections.Location = new System.Drawing.Point(93, 62);
+            this.txtBox_Sections.Name = "txtBox_Sections";
+            this.txtBox_Sections.Size = new System.Drawing.Size(281, 20);
+            this.txtBox_Sections.TabIndex = 2;
             // 
             // btn_save
             // 
@@ -94,6 +94,7 @@
             // 
             // btn_cancel
             // 
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_cancel.Location = new System.Drawing.Point(218, 103);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(75, 23);
@@ -120,7 +121,7 @@
             this.Controls.Add(this.txtBox_subject);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_save);
-            this.Controls.Add(this.txtBox_chapters);
+            this.Controls.Add(this.txtBox_Sections);
             this.Controls.Add(this.lbl_chapters);
             this.Controls.Add(this.lbl_Subject);
             this.Controls.Add(this.txtBox_playlistName);
@@ -138,7 +139,7 @@
         private System.Windows.Forms.TextBox txtBox_playlistName;
         private System.Windows.Forms.Label lbl_Subject;
         private System.Windows.Forms.Label lbl_chapters;
-        private System.Windows.Forms.TextBox txtBox_chapters;
+        private System.Windows.Forms.TextBox txtBox_Sections;
         private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.TextBox txtBox_subject;

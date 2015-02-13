@@ -13,55 +13,53 @@ namespace StudyWizard
 {
     public partial class SelectEditForm : Form
     {
-        OpeningForm openingForm = new OpeningForm();
+        MainForm mainForm = new MainForm();
         PandQ pandQ = new PandQ();
 
-        public SelectEditForm(OpeningForm myOpeningForm, PandQ myPandQ)
+        public SelectEditForm(MainForm myMainForm, PandQ myPandQ)
         {
             InitializeComponent();
-            openingForm = myOpeningForm;
+            mainForm = myMainForm;
             pandQ = myPandQ;
             lsbx_EditListBox.DataSource = pandQ.playlistNames;
         }
 
         private void btn_edit_Click(object sender, EventArgs e)
         {
-            EditForm editForm = new EditForm(openingForm, pandQ, lsbx_EditListBox.SelectedIndex);
+            EditForm editForm = new EditForm(mainForm, pandQ, lsbx_EditListBox.SelectedIndex);
             editForm.Show();
             this.Close();
         }
 
         private void btn_back_Click(object sender, EventArgs e)
         {
-            openingForm.Show();
+            mainForm.Show();
             this.Close();
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-
             pandQ.deletePlaylist(lsbx_EditListBox.SelectedIndex);
             lsbx_EditListBox.ClearSelected();
-            this.Close();
         }
 
         private void btn_viewAll_Click(object sender, EventArgs e)
         {
-            ViewAllQuestionsForm viewAllQuestionsForm = new ViewAllQuestionsForm(openingForm, pandQ);
+            ViewAllQuestionsForm viewAllQuestionsForm = new ViewAllQuestionsForm(mainForm, pandQ);
             viewAllQuestionsForm.Show();
             this.Close();
         }
 
         private void btn_addQuestion_Click(object sender, EventArgs e)
         {
-            AddQuestionForm addQuestionForm = new AddQuestionForm(openingForm, pandQ);
+            AddQuestionForm addQuestionForm = new AddQuestionForm(mainForm, pandQ);
             addQuestionForm.Show();
             this.Close();
         }
 
         private void btn_new_Click(object sender, EventArgs e)
         {
-            EditForm editForm = new EditForm(openingForm, pandQ);
+            EditForm editForm = new EditForm(mainForm, pandQ);
             editForm.Show();
             this.Close();
         }

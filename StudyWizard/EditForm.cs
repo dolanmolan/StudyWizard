@@ -12,53 +12,62 @@ namespace StudyWizard
 {
     public partial class EditForm : Form
     {
-        OpeningForm openingForm = new OpeningForm();
+        DialogResult dialogResult = new DialogResult();
+        MainForm mainForm = new MainForm();
         PandQ pandQ = new PandQ();
         int selectedPlaylist;
         bool newPlaylist;
 
-        public EditForm(OpeningForm myOpeningForm, PandQ myPandQ)
+        public EditForm(MainForm myMainForm, PandQ myPandQ)
         {
             InitializeComponent();
-            openingForm = myOpeningForm;
+            mainForm = myMainForm;
             pandQ = myPandQ;
             newPlaylist = true;
         }
-        public EditForm(OpeningForm myOpeningForm, PandQ myPandQ, int mySelectedPlaylist)
+        public EditForm(MainForm myMainForm, PandQ myPandQ, int mySelectedPlaylist)
         {
             InitializeComponent();
-            openingForm = myOpeningForm;
+            mainForm = myMainForm;
             pandQ = myPandQ;
             selectedPlaylist = mySelectedPlaylist;
             txtBox_playlistName.Text = pandQ.playlistNames[selectedPlaylist];
             txtBox_subject.Text = pandQ.playlistSubjects[selectedPlaylist];
-            txtBox_chapters.Text = pandQ.playlistSections[selectedPlaylist];
+            txtBox_Sections.Text = pandQ.playlistSections[selectedPlaylist];
             newPlaylist = false;
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = new DialogResult();
             dialogResult = MessageBox.Show("Are you sure you want to cancel?", "Cancel?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.Yes)
             {
                 this.Close();
-                SelectEditForm selectEditForm = new SelectEditForm(openingForm, pandQ);
+                SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ);
                 selectEditForm.Show();
             }
         }
 
         private void btn_save_Click(object sender, EventArgs e)
         {
+            List<double> tempDoubles = new List<double>();
+            try
+            {
+                tempDoubles = pandQ.convertStringToDouble(txtBox_Sections.Text);
+            }
+            catch
+            {
+                dialogResult = MessageBox.Show("Please make sure you are entering in the sections correctly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             if (newPlaylist)
             {
-                pandQ.savePlaylist(txtBox_playlistName.Text, txtBox_subject.Text, txtBox_chapters.Text);
+                pandQ.savePlaylist(txtBox_playlistName.Text, txtBox_subject.Text, txtBox_Sections.Text);
             }
             else
             {
-                pandQ.savePlaylist(selectedPlaylist, txtBox_playlistName.Text, txtBox_subject.Text, txtBox_chapters.Text);
+                pandQ.savePlaylist(selectedPlaylist, txtBox_playlistName.Text, txtBox_subject.Text, txtBox_Sections.Text);
             }
-            SelectEditForm selectEditForm = new SelectEditForm(openingForm, pandQ);
+            SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ);
             selectEditForm.Show();
             this.Close();
         }

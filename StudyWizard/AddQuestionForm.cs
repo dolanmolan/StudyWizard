@@ -13,13 +13,13 @@ namespace StudyWizard
     public partial class AddQuestionForm : Form
     {
         DialogResult dialogResult = new DialogResult();
-        OpeningForm openingForm = new OpeningForm();
+        MainForm mainForm = new MainForm();
         PandQ pandQ = new PandQ();
 
-        public AddQuestionForm(OpeningForm myOpeningForm, PandQ myPandQ)
+        public AddQuestionForm(MainForm myMainForm, PandQ myPandQ)
         {
             InitializeComponent();
-            openingForm = myOpeningForm;
+            mainForm = myMainForm;
             pandQ = myPandQ;
         }
 
@@ -29,7 +29,7 @@ namespace StudyWizard
             if (dialogResult == DialogResult.Yes)
             {
                 this.Close();
-                SelectEditForm selectEditForm = new SelectEditForm(openingForm, pandQ);
+                SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ);
                 selectEditForm.Show();
             }
         }

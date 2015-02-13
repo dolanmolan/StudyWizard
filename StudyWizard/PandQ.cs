@@ -24,6 +24,9 @@ namespace StudyWizard
         /// </summary>
         public void loadPandQ()
         {
+            playlistNames.Clear();
+            playlistSubjects.Clear();
+            playlistSections.Clear();
             string tempQuestion = "";
             string tempQuestionSubject = "";
             string tempQuestionSection = "";
@@ -76,7 +79,7 @@ namespace StudyWizard
                         {
                             question = tempQuestion,
                             subject = tempQuestionSubject,
-                            sections = tempQuestionSection,
+                            section = tempQuestionSection,
                             answers = tempQuestionSelections,
                             correctAnswer = tempQuestionCorrectAnswer,
                             explanation = tempQuestionExplanation
@@ -217,7 +220,7 @@ namespace StudyWizard
         /// <param name="newAnswer4">New Question Answer</param>
         /// <param name="newCorrectAnswer">New Question Correct Answer</param>
         /// <param name="newExplanation">New Question Explanation</param>
-        public void addQuestion(string newQuestion, string newSubject, string newSections, string newAnswer1, string newAnswer2, string newAnswer3, string newAnswer4, int newCorrectAnswer, string newExplanation)
+        public void addQuestion(string newQuestion, string newSubject, string newSection, string newAnswer1, string newAnswer2, string newAnswer3, string newAnswer4, int newCorrectAnswer, string newExplanation)
         {
             srf.Close();
             srf.Dispose();
@@ -234,14 +237,14 @@ namespace StudyWizard
                 {
                     question = newQuestion,
                     subject = newSubject,
-                    sections = newSections,
+                    section = newSection,
                     answers = tempAnswers,
                     correctAnswer = newCorrectAnswer,
                     explanation = newExplanation
                 });
                 savefile.WriteLine("Q:" + newQuestion);
                 savefile.WriteLine("B:" + newSubject);
-                savefile.WriteLine("C:" + newSections);
+                savefile.WriteLine("C:" + newSection);
                 savefile.WriteLine("A:" + newAnswer1);
                 savefile.WriteLine("A:" + newAnswer2);
                 savefile.WriteLine("A:" + newAnswer3);
@@ -251,13 +254,59 @@ namespace StudyWizard
                 savefile.WriteLine("|");
             }
         }
+
+        /// <summary>
+        /// Takes a string of numbers that are separated by commas and converts each of them into doubles
+        /// </summary>
+        /// <param name="inputString">The string to be converted into doubles</param>
+        public List<double> convertStringToDouble(string inputString)
+        {
+            List<double> doubles = new List<double>();
+            string tempString = "";
+            for (int i = 0; i < inputString.Length; i++)
+            {
+                if (inputString[i] != ',')
+                {
+                    tempString += inputString[i];
+                }
+                else
+                {
+                    doubles.Add(Convert.ToDouble(tempString));
+                }
+            }
+            return doubles;
+        }
+
+        /// <summary>
+        /// takes an index of a specified playlist and finds questions that matched that playlists subject and section(s)
+        /// </summary>
+        /// <param name="playlistIndex">index of the playlist name in the playlistNames BindingList</param>
+        /// <returns>Returns a list of questions that match the specified playlists subject and section(s)</returns>
+        public List<Questions> findQuestions(int playlistIndex)
+        {
+            List<Questions> rightQuestions = new List<Questions>();
+            for (int i = 0; i < questions.Count; i++)
+            {
+                if (questions[i].subject == playlistSubjects[playlistIndex])
+                {
+                    for (int j = 0; j < convertStringToDouble(playlistSections[i]).Count; j++)
+                    {
+                        if (Convert.ToDouble(questions[i].section) == convertStringToDouble(playlistSections[i])[j])
+                        {
+                            rightQuestions.Add(questions[i]);
+                        }
+                    }
+                }
+            }
+            return rightQuestions;
+        }
     }
 
     public class Questions
     {
         public string question { get; set; }
         public string subject { get; set; }
-        public string sections { get; set; }
+        public string section { get; set; }
         public List<string> answers = new List<string>();
         public int correctAnswer { get; set; }
         public string explanation { get; set; }
