@@ -18,6 +18,8 @@ namespace StudyWizard
         public string file;
         StreamReader srf;
         public int numberOfPlaylists = 0;
+        static Random random = new Random();
+
 
         /// <summary>
         /// Loads a selected text file.
@@ -32,7 +34,7 @@ namespace StudyWizard
             string tempQuestionSection = "";
             int tempQuestionCorrectAnswer = 0;
             string tempQuestionExplanation = "";
-            List<string> tempQuestionSelections = new List<string>();
+            List<string> tempQuestionAnswers = new List<string>();
             srf = new StreamReader(file);
             string s = "";
             while ((s = srf.ReadLine()) != null)
@@ -66,7 +68,7 @@ namespace StudyWizard
                         break;
                     case 'A':
                         s = s.Remove(0, 2);
-                        tempQuestionSelections.Add(s);
+                        tempQuestionAnswers.Add(s);
                         break;
                     case 'R':
                         s = s.Remove(0, 2);
@@ -80,10 +82,11 @@ namespace StudyWizard
                             question = tempQuestion,
                             subject = tempQuestionSubject,
                             section = tempQuestionSection,
-                            answers = tempQuestionSelections,
                             correctAnswer = tempQuestionCorrectAnswer,
                             explanation = tempQuestionExplanation
                         });
+                        tempQuestionAnswers.CopyTo(0, questions[questions.Count - 1].answers, 0, 4);
+                        tempQuestionAnswers.Clear();
                         break;
                     default:
                         break;
@@ -225,8 +228,7 @@ namespace StudyWizard
             srf.Close();
             srf.Dispose();
             string[] lines = File.ReadAllLines(file);
-            List<string> tempAnswers = new List<string>();
-            tempAnswers.Add(newAnswer1); tempAnswers.Add(newAnswer2); tempAnswers.Add(newAnswer3); tempAnswers.Add(newAnswer4);
+            string[] tempAnswers = new string[] { newAnswer1, newAnswer2, newAnswer3, newAnswer4 };
             using (StreamWriter savefile = new StreamWriter(file))
             {
                 foreach (string line in lines)
@@ -259,6 +261,7 @@ namespace StudyWizard
         /// Takes a string of numbers that are separated by commas and converts each of them into doubles
         /// </summary>
         /// <param name="inputString">The string to be converted into doubles</param>
+        /// <returns>A List of doubles</returns>
         public List<double> convertStringToDouble(string inputString)
         {
             List<double> doubles = new List<double>();
@@ -272,7 +275,12 @@ namespace StudyWizard
                 else
                 {
                     doubles.Add(Convert.ToDouble(tempString));
+                    tempString = "";
                 }
+            }
+            if (tempString != "")
+            {
+                doubles.Add(Convert.ToDouble(tempString));
             }
             return doubles;
         }
@@ -289,9 +297,10 @@ namespace StudyWizard
             {
                 if (questions[i].subject == playlistSubjects[playlistIndex])
                 {
-                    for (int j = 0; j < convertStringToDouble(playlistSections[i]).Count; j++)
+                    List<double> tempList = convertStringToDouble(playlistSections[playlistIndex]);
+                    for (int j = 0; j < tempList.Count; j++)
                     {
-                        if (Convert.ToDouble(questions[i].section) == convertStringToDouble(playlistSections[i])[j])
+                        if (Convert.ToDouble(questions[i].section) == convertStringToDouble(playlistSections[playlistIndex])[j])
                         {
                             rightQuestions.Add(questions[i]);
                         }
@@ -300,6 +309,33 @@ namespace StudyWizard
             }
             return rightQuestions;
         }
+
+
+        public string[] RandomizeStrings(string[] arr)
+        {
+            List<KeyValuePair<int, string>> list = new List<KeyValuePair<int, string>>();
+            // Add all strings from array
+            // Add new random int each time
+            foreach (string s in arr)
+            {
+                list.Add(new KeyValuePair<int, string>(random.Next(), s));
+            }
+            // Sort the list by the random number
+            var sorted = from item in list
+                         orderby item.Key
+                         select item;
+            // Allocate new string array
+            string[] result = new string[arr.Length];
+            // Copy values to array
+            int index = 0;
+            foreach (KeyValuePair<int, string> pair in sorted)
+            {
+                result[index] = pair.Value;
+                index++;
+            }
+            // Return copied array
+            return result;
+        }
     }
 
     public class Questions
@@ -307,7 +343,7 @@ namespace StudyWizard
         public string question { get; set; }
         public string subject { get; set; }
         public string section { get; set; }
-        public List<string> answers = new List<string>();
+        public string[] answers = new string[4];
         public int correctAnswer { get; set; }
         public string explanation { get; set; }
     }

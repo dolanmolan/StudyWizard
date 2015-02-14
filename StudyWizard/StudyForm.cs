@@ -17,6 +17,8 @@ namespace StudyWizard
         PandQ pandQ = new PandQ();
         int selectedPlaylist;
         List<Questions> studyingQuestions = new List<Questions>();
+        int correctAnswer;
+        int randomQuestion;
 
         public StudyForm(MainForm myMainForm, PandQ myPandQ, int mySelectedPlaylist)
         {
@@ -25,7 +27,8 @@ namespace StudyWizard
             pandQ = myPandQ;
             selectedPlaylist = mySelectedPlaylist;
             studyingQuestions = pandQ.findQuestions(selectedPlaylist);
-            addNewQuestion();
+            randomQuestion = random.Next(studyingQuestions.Count);
+            correctAnswer = addNewQuestion(randomQuestion);
         }
 
         private void btn_quit_Click(object sender, EventArgs e)
@@ -34,54 +37,46 @@ namespace StudyWizard
             dialogResult = MessageBox.Show("Are you sure you want to quit?", "Quit?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.Yes)
             {
-                MainForm openingForm = new MainForm();
-                openingForm.Show();
+                mainForm.Show();
                 this.Close();
             }
         }
 
         private void btn_submit_Click(object sender, EventArgs e)
         {
-            addNewQuestion();
+            if (rdoBtn_answer1.Checked && correctAnswer == 0 || rdoBtn_answer2.Checked && correctAnswer == 1 || rdoBtn_answer3.Checked && correctAnswer == 2 || rdoBtn_answer4.Checked && correctAnswer == 3)
+            {
+                DialogResult = MessageBox.Show("Correct!\n" + studyingQuestions[randomQuestion].explanation, "Correct!", MessageBoxButtons.OK, MessageBoxIcon.None);
+            }
+            else
+            {
+                DialogResult = MessageBox.Show("Not Quite!\n" + studyingQuestions[randomQuestion].explanation, "Incorrect", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            rdoBtn_answer1.Checked = false;
+            rdoBtn_answer2.Checked = false;
+            rdoBtn_answer3.Checked = false;
+            rdoBtn_answer4.Checked = false;
+            randomQuestion = random.Next(studyingQuestions.Count);
+            correctAnswer = addNewQuestion(randomQuestion);
         }
 
-        private void addNewQuestion()
+        private int addNewQuestion(int randomQuestion)
         {
-            string[] shuffledAnswer = new string[4];
-            int[] shuffledAnswerIndex = new int[4];
-            int randomQuestion = random.Next(studyingQuestions.Count);
+            int shuffledCorrectAnswer = 0;
             txtBox_question.Text = studyingQuestions[randomQuestion].question;
+            string[] shuffledAnswer = pandQ.RandomizeStrings(studyingQuestions[randomQuestion].answers);
             for (int i = 0; i < 4; i++)
             {
-                bool validAnswer = false;
-                do
+                if (shuffledAnswer[i] == studyingQuestions[randomQuestion].answers[studyingQuestions[randomQuestion].correctAnswer])
                 {
-                    int randomAnswer = random.Next(3);
-                    if (!shuffledAnswerIndex.Contains(randomAnswer))
-                    {
-                        shuffledAnswer[i] = studyingQuestions[randomQuestion].answers[randomAnswer];
-                        shuffledAnswerIndex[i] = randomAnswer;
-                        switch (i)
-                        {
-                            case 0:
-                                rdoBtn_answer1.Text = shuffledAnswer[i];
-                                break;
-                            case 1:
-                                rdoBtn_answer2.Text = shuffledAnswer[i];
-                                break;
-                            case 2:
-                                rdoBtn_answer3.Text = shuffledAnswer[i];
-                                break;
-                            case 3:
-                                rdoBtn_answer4.Text = shuffledAnswer[i];
-                                break;
-                            default: break;
-                        }
-                        validAnswer = true;
-                    }
-                } while (!validAnswer);
+                    shuffledCorrectAnswer = i;
+                }
             }
-
+            rdoBtn_answer1.Text = shuffledAnswer[0];
+            rdoBtn_answer2.Text = shuffledAnswer[1];
+            rdoBtn_answer3.Text = shuffledAnswer[2];
+            rdoBtn_answer4.Text = shuffledAnswer[3];
+            return shuffledCorrectAnswer;
         }
     }
 }
