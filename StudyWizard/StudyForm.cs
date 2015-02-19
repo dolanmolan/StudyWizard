@@ -52,16 +52,16 @@ namespace StudyWizard
             {
                 DialogResult = MessageBox.Show("Not Quite!\n" + studyingQuestions[randomQuestion].explanation, "Incorrect", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            rdoBtn_answer1.Checked = false;
-            rdoBtn_answer2.Checked = false;
-            rdoBtn_answer3.Checked = false;
-            rdoBtn_answer4.Checked = false;
             randomQuestion = random.Next(studyingQuestions.Count);
             correctAnswer = addNewQuestion(randomQuestion);
         }
 
         private int addNewQuestion(int randomQuestion)
         {
+            rdoBtn_answer1.Checked = false;
+            rdoBtn_answer2.Checked = false;
+            rdoBtn_answer3.Checked = false;
+            rdoBtn_answer4.Checked = false;
             int shuffledCorrectAnswer = 0;
             txtBox_question.Text = studyingQuestions[randomQuestion].question;
             string[] shuffledAnswer = pandQ.RandomizeStrings(studyingQuestions[randomQuestion].answers);

@@ -57,7 +57,7 @@ namespace StudyWizard
             this.Close();
         }
 
-        private void btn_new_Click(object sender, EventArgs e)
+        private void btn_newPlaylist_Click(object sender, EventArgs e)
         {
             EditForm editForm = new EditForm(mainForm, pandQ);
             editForm.Show();

@@ -14,7 +14,7 @@ namespace StudyWizard
         public BindingList<string> playlistNames = new BindingList<string>();
         public List<string> playlistSubjects = new List<string>();
         public List<string> playlistSections = new List<string>();
-        public List<Questions> questions = new List<Questions>();
+        public BindingList<Questions> questions = new BindingList<Questions>();
         public string file;
         StreamReader srf;
         public int numberOfPlaylists = 0;
@@ -162,6 +162,40 @@ namespace StudyWizard
         }
 
         /// <summary>
+        /// Removes a specific question, specified by the index of the question in the questions BindingList.
+        /// </summary>
+        /// <param name="questionIndex">index of the question in the questions BindingList</param>
+        public void deleteQuestion(CheckedListBox.CheckedIndexCollection questionIndices)
+        {
+            srf.Close();
+            srf.Dispose();
+            string[] lines = File.ReadAllLines(file);
+            string[] newLines = File.ReadAllLines(file);
+            using (StreamWriter savefile = new StreamWriter(file))
+            {
+                int index = 0;
+                foreach (string line in lines)
+                {
+                    for (int i = 0; i < questionIndices.Count; i++)
+                    {
+                        // If the current line does not contain any property of the questions that is going to be deleted, continue.
+                        if (!line.Contains(questions[questionIndices[i]].question) && !line.Contains(questions[questionIndices[i]].subject) && !line.Contains(questions[questionIndices[i]].section) && !line.Contains(questions[questionIndices[i]].answers[0]) && !line.Contains(questions[questionIndices[i]].answers[1]) && !line.Contains(questions[questionIndices[i]].answers[2]) && !line.Contains(questions[questionIndices[i]].answers[3]) && !line.Contains(Convert.ToString(questions[questionIndices[i]].correctAnswer)) && !line.Contains(questions[questionIndices[i]].explanation))
+                        {
+                            // If the current line contains a useless "|", don't write.
+                            if ((!(index == 0 && line.Contains("|"))) && (!(line.Contains("|") && (lines[index - 1].Contains("|")))))
+                            {
+                                savefile.WriteLine(line);
+                                newLines[index] = line;
+                                index++;
+                            }
+                        }
+                        questions.RemoveAt(questionIndices[i]);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Removes a specific playlist, specified by the index of the playlist name in the playlistNames BindingList.
         /// </summary>
         /// <param name="playlistIndex">index of the playlist name in the playlistNames BindingList</param>
@@ -177,7 +211,7 @@ namespace StudyWizard
                 int index = 0;
                 foreach (string line in lines)
                 {
-                    // If the current line does not contain any of the playlist that is going to be deleted, continue.
+                    // If the current line does not contain any property of the playlist that is going to be deleted, continue.
                     if (!line.Contains(playlistNames[playlistIndex]) && !line.Contains(playlistSubjects[playlistIndex]) && !line.Contains(playlistSections[playlistIndex]))
                     {
                         // If the current line contains a useless "|", don't write.
@@ -196,19 +230,17 @@ namespace StudyWizard
         }
 
         /// <summary>
-        /// Returns an array that hold the question, the answer, and a blank space for each question.
+        /// Returns a List of the questions.
         /// </summary>
         /// <returns>Questions and answers</returns>
-        public string[] viewAllQuestions()
+        public List<string> viewAllQuestions()
         {
-            string[] returnString = new string[(questions.Count) * 3];
-            for (int i = 0; i < returnString.Length; i += 3)
+            List<string> returnList = new List<string>();
+            for (int i = 0; i < questions.Count; i++)
             {
-                returnString[i] = questions[i/3].question;
-                returnString[i + 1] = questions[i/3].answers[questions[i/3].correctAnswer];
-                returnString[i + 2] = "";
+                returnList.Add(questions[i].question);
             }
-            return returnString;
+            return returnList;
         }
 
         /// <summary>

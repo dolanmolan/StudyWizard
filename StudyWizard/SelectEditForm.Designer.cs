@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.lsbx_EditListBox = new System.Windows.Forms.ListBox();
-            this.btn_new = new System.Windows.Forms.Button();
+            this.btn_newPlaylist = new System.Windows.Forms.Button();
             this.btn_edit = new System.Windows.Forms.Button();
             this.btn_addQuestion = new System.Windows.Forms.Button();
             this.btn_viewAll = new System.Windows.Forms.Button();
@@ -47,15 +47,15 @@
             this.lsbx_EditListBox.Size = new System.Drawing.Size(129, 238);
             this.lsbx_EditListBox.TabIndex = 0;
             // 
-            // btn_new
+            // btn_newPlaylist
             // 
-            this.btn_new.Location = new System.Drawing.Point(173, 41);
-            this.btn_new.Name = "btn_new";
-            this.btn_new.Size = new System.Drawing.Size(99, 23);
-            this.btn_new.TabIndex = 1;
-            this.btn_new.Text = "New";
-            this.btn_new.UseVisualStyleBackColor = true;
-            this.btn_new.Click += new System.EventHandler(this.btn_new_Click);
+            this.btn_newPlaylist.Location = new System.Drawing.Point(173, 41);
+            this.btn_newPlaylist.Name = "btn_newPlaylist";
+            this.btn_newPlaylist.Size = new System.Drawing.Size(99, 23);
+            this.btn_newPlaylist.TabIndex = 1;
+            this.btn_newPlaylist.Text = "New Playlist";
+            this.btn_newPlaylist.UseVisualStyleBackColor = true;
+            this.btn_newPlaylist.Click += new System.EventHandler(this.btn_newPlaylist_Click);
             // 
             // btn_edit
             // 
@@ -120,7 +120,7 @@
             this.Controls.Add(this.btn_viewAll);
             this.Controls.Add(this.btn_addQuestion);
             this.Controls.Add(this.btn_edit);
-            this.Controls.Add(this.btn_new);
+            this.Controls.Add(this.btn_newPlaylist);
             this.Controls.Add(this.lsbx_EditListBox);
             this.Name = "SelectEditForm";
             this.Text = "Edit";
@@ -130,7 +130,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btn_new;
+        private System.Windows.Forms.Button btn_newPlaylist;
         private System.Windows.Forms.Button btn_edit;
         private System.Windows.Forms.Button btn_addQuestion;
         private System.Windows.Forms.Button btn_viewAll;

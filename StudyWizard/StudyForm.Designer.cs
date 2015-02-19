@@ -99,7 +99,7 @@
             this.btn_quit.Location = new System.Drawing.Point(12, 272);
             this.btn_quit.Name = "btn_quit";
             this.btn_quit.Size = new System.Drawing.Size(85, 28);
-            this.btn_quit.TabIndex = 4;
+            this.btn_quit.TabIndex = 0;
             this.btn_quit.Text = "Quit";
             this.btn_quit.UseVisualStyleBackColor = true;
             this.btn_quit.Click += new System.EventHandler(this.btn_quit_Click);
@@ -110,7 +110,7 @@
             this.btn_submit.Location = new System.Drawing.Point(527, 272);
             this.btn_submit.Name = "btn_submit";
             this.btn_submit.Size = new System.Drawing.Size(85, 28);
-            this.btn_submit.TabIndex = 5;
+            this.btn_submit.TabIndex = 1;
             this.btn_submit.Text = "Submit";
             this.btn_submit.UseVisualStyleBackColor = true;
             this.btn_submit.Click += new System.EventHandler(this.btn_submit_Click);

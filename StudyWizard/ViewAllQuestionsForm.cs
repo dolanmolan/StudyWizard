@@ -20,7 +20,7 @@ namespace StudyWizard
             InitializeComponent();
             mainForm = myMainForm;
             pandQ = myPlaylist;
-            txtBox_Questions.Lines = pandQ.viewAllQuestions();
+            chdlsbx_questions.DataSource = pandQ.viewAllQuestions();
         }
 
         private void btn_back_Click(object sender, EventArgs e)
@@ -28,6 +28,12 @@ namespace StudyWizard
             SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ);
             selectEditForm.Show();
             this.Close();
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            pandQ.deleteQuestion(chdlsbx_questions.CheckedIndices);
+            chdlsbx_questions.ClearSelected();
         }
     }
 }
