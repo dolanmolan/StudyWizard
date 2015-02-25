@@ -16,6 +16,7 @@ namespace StudyWizard
         OpenFileDialog openFileDialog = new OpenFileDialog();
         PandQ pandQ = new PandQ();
         Questions questions = new Questions();
+        public bool textFileSelected = false;
         
         public MainForm()
         {
@@ -24,14 +25,22 @@ namespace StudyWizard
 
         private void btn_study_Click(object sender, EventArgs e)
         {
-            SelectStudyForm selectStudyForm = new SelectStudyForm(this, pandQ, questions);
-            selectStudyForm.Show();
-            this.Hide();
+            if (textFileSelected)
+            {
+                SelectStudyForm selectStudyForm = new SelectStudyForm(this, pandQ, questions);
+                selectStudyForm.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("You didn't select a file! Click \"Load File\" and then select a file you wish to study from.",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void btn_edit_Click(object sender, EventArgs e)
         {
-            SelectEditForm selectEditForm = new SelectEditForm(this, pandQ);
+            SelectEditForm selectEditForm = new SelectEditForm(this, pandQ, textFileSelected);
             selectEditForm.Show();
             this.Hide();
         }
@@ -49,9 +58,14 @@ namespace StudyWizard
             openFileDialog.RestoreDirectory = true;
             openFileDialog.Multiselect = false;
             openFileDialog.ShowDialog();
-            string file = openFileDialog.FileName;
-            pandQ.file = file;
-            pandQ.loadTextFile();
+            try
+            {
+                string file = openFileDialog.FileName;
+                pandQ.file = file;
+                pandQ.loadTextFile();
+                textFileSelected = true;
+            }
+            catch { }
         }
     }
 }

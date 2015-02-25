@@ -92,7 +92,7 @@ namespace StudyWizard
                         break;
                 }
             }
-
+            srf.Close();
         }
 
         /// <summary>
@@ -100,7 +100,6 @@ namespace StudyWizard
         /// </summary>
         public void saveTextFile()
         {
-            srf.Close();
             using (StreamWriter savefile = new StreamWriter(file))
             {
                 for (int i = 0; i < numberOfPlaylists; i++)
@@ -162,7 +161,6 @@ namespace StudyWizard
         /// <param name="questionIndex">index of the question in the questions BindingList</param>
         public void deleteQuestion(CheckedListBox.CheckedIndexCollection questionIndices)
         {
-            srf.Close();
             for (int i = 0; i < questionIndices.Count; i++)
             {
                 questions.RemoveAt(questionIndices[i]);

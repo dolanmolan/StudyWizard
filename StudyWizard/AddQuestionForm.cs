@@ -15,12 +15,14 @@ namespace StudyWizard
         DialogResult dialogResult = new DialogResult();
         MainForm mainForm = new MainForm();
         PandQ pandQ = new PandQ();
+        bool textFileSelected;
 
-        public AddQuestionForm(MainForm myMainForm, PandQ myPandQ)
+        public AddQuestionForm(MainForm myMainForm, PandQ myPandQ, bool myTextFileSelected)
         {
             InitializeComponent();
             mainForm = myMainForm;
             pandQ = myPandQ;
+            textFileSelected = myTextFileSelected;
         }
 
         private void btn_done_Click(object sender, EventArgs e)
@@ -29,7 +31,7 @@ namespace StudyWizard
             if (dialogResult == DialogResult.Yes)
             {
                 this.Close();
-                SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ);
+                SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ, textFileSelected);
                 selectEditForm.Show();
             }
         }

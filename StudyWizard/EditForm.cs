@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace StudyWizard
 {
@@ -17,15 +18,17 @@ namespace StudyWizard
         PandQ pandQ = new PandQ();
         int selectedPlaylist;
         bool newPlaylist;
+        bool textFileSelected;
 
-        public EditForm(MainForm myMainForm, PandQ myPandQ)
+        public EditForm(MainForm myMainForm, PandQ myPandQ, bool myTextFileSelected)
         {
             InitializeComponent();
             mainForm = myMainForm;
             pandQ = myPandQ;
             newPlaylist = true;
+            textFileSelected = myTextFileSelected;
         }
-        public EditForm(MainForm myMainForm, PandQ myPandQ, int mySelectedPlaylist)
+        public EditForm(MainForm myMainForm, PandQ myPandQ, int mySelectedPlaylist, bool myTextFileSelected)
         {
             InitializeComponent();
             mainForm = myMainForm;
@@ -35,6 +38,7 @@ namespace StudyWizard
             txtBox_subject.Text = pandQ.playlistSubjects[selectedPlaylist];
             txtBox_Sections.Text = pandQ.playlistSections[selectedPlaylist];
             newPlaylist = false;
+            textFileSelected = myTextFileSelected;
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
@@ -43,7 +47,7 @@ namespace StudyWizard
             if (dialogResult == DialogResult.Yes)
             {
                 this.Close();
-                SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ);
+                SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ, textFileSelected);
                 selectEditForm.Show();
             }
         }
@@ -59,6 +63,22 @@ namespace StudyWizard
             {
                 dialogResult = MessageBox.Show("Please make sure you are entering in the sections correctly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            if (!textFileSelected)
+            {
+                Stream stream;
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "txt files (*.txt)|*.txt";
+                saveFileDialog.FilterIndex = 2;
+                saveFileDialog.RestoreDirectory = true; if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    if ((stream = saveFileDialog.OpenFile()) != null)
+                    {
+                        pandQ.file = saveFileDialog.FileName;
+                        textFileSelected = true;
+                        stream.Close();
+                    }
+                }
+            }
             if (newPlaylist)
             {
                 pandQ.saveNewPlaylist(txtBox_playlistName.Text, txtBox_subject.Text, txtBox_Sections.Text);
@@ -67,7 +87,7 @@ namespace StudyWizard
             {
                 pandQ.savePlaylist(selectedPlaylist, txtBox_playlistName.Text, txtBox_subject.Text, txtBox_Sections.Text);
             }
-            SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ);
+            SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ, textFileSelected);
             selectEditForm.Show();
             this.Close();
         }
