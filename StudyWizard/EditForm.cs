@@ -50,10 +50,10 @@ namespace StudyWizard
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            List<double> tempDoubles = new List<double>();
+            List<string> tempSections = new List<string>();
             try
             {
-                tempDoubles = pandQ.convertStringToDouble(txtBox_Sections.Text);
+                tempSections = pandQ.splitString(txtBox_Sections.Text);
             }
             catch
             {
@@ -61,7 +61,7 @@ namespace StudyWizard
             }
             if (newPlaylist)
             {
-                pandQ.savePlaylist(txtBox_playlistName.Text, txtBox_subject.Text, txtBox_Sections.Text);
+                pandQ.saveNewPlaylist(txtBox_playlistName.Text, txtBox_subject.Text, txtBox_Sections.Text);
             }
             else
             {

@@ -51,7 +51,7 @@ namespace StudyWizard
             openFileDialog.ShowDialog();
             string file = openFileDialog.FileName;
             pandQ.file = file;
-            pandQ.loadPandQ();
+            pandQ.loadTextFile();
         }
     }
 }

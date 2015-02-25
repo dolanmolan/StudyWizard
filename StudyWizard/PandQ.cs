@@ -24,7 +24,7 @@ namespace StudyWizard
         /// <summary>
         /// Loads a selected text file.
         /// </summary>
-        public void loadPandQ()
+        public void loadTextFile()
         {
             playlistNames.Clear();
             playlistSubjects.Clear();
@@ -96,6 +96,37 @@ namespace StudyWizard
         }
 
         /// <summary>
+        /// Writes the playlists and questions to the selected text file.
+        /// </summary>
+        public void saveTextFile()
+        {
+            srf.Close();
+            using (StreamWriter savefile = new StreamWriter(file))
+            {
+                for (int i = 0; i < numberOfPlaylists; i++)
+                {
+                    savefile.WriteLine("P:" + playlistNames[i]);
+                    savefile.WriteLine("U:" + playlistSubjects[i]);
+                    savefile.WriteLine("E:" + playlistSections[i]);
+                    savefile.WriteLine("|");
+                }
+                for (int i = 0; i < questions.Count; i++)
+                {
+                    savefile.WriteLine("Q:" + questions[i].question);
+                    savefile.WriteLine("B:" + questions[i].subject);
+                    savefile.WriteLine("C:" + questions[i].section);
+                    for (int j = 0; j < 4; j++)
+                    {
+                        savefile.WriteLine("A:" + questions[i].answers[j]);
+                    }
+                    savefile.WriteLine("R:" + questions[i].correctAnswer);
+                    savefile.WriteLine("_:" + questions[i].explanation);
+                    savefile.WriteLine("|");
+                }
+            }
+        }
+
+        /// <summary>
         /// Changes the properties of a specific playlist, specified by the index of the playlist name in the playlistNames BindingList
         /// </summary>
         /// <param name="selectedPlaylist">index of the playlist name in the playlistNames BindingList</param>
@@ -104,35 +135,11 @@ namespace StudyWizard
         /// <param name="section">New Playtlist Section(s)</param>
         public void savePlaylist(int selectedPlaylist, string name, string subject, string section)
         {
-            srf.Close();
-            srf.Dispose();
-            string[] lines = File.ReadAllLines(file);
-            using (StreamWriter savefile = new StreamWriter(file))
-            {
-                foreach (string line in lines)
-                {
-                    if (!line.Contains(playlistNames[selectedPlaylist]) && !line.Contains(playlistSubjects[selectedPlaylist]) && !line.Contains(playlistSections[selectedPlaylist]))
-                    {
-                        savefile.WriteLine(line);
-                    }
-                    if (line.Contains(playlistNames[selectedPlaylist]))
-                    {
-                        savefile.WriteLine("P:" + name);
-                    }
-                    if (line.Contains(playlistSubjects[selectedPlaylist]))
-                    {
-                        savefile.WriteLine("U:" + subject);
-                    }
-                    if (line.Contains(playlistSections[selectedPlaylist]))
-                    {
-                        savefile.WriteLine("E:" + section);
-                    }
-                    playlistNames[selectedPlaylist] = name;
-                    playlistSubjects[selectedPlaylist] = subject;
-                    playlistSections[selectedPlaylist] = section;
-                }
+            playlistNames[selectedPlaylist] = name;
+            playlistSubjects[selectedPlaylist] = subject;
+            playlistSections[selectedPlaylist] = section;
+            saveTextFile();
             }
-        }
 
         /// <summary>
         /// Appends a playlist to the text file, as well as adds it to the playlist lists(playlistNames, playlistSubjects, playlistSections).
@@ -140,25 +147,13 @@ namespace StudyWizard
         /// <param name="name">Playlist Name</param>
         /// <param name="subject">Playlist Subject</param>
         /// <param name="section">Playlist Section(s)</param>
-        public void savePlaylist(string name, string subject, string section)
+        public void saveNewPlaylist(string name, string subject, string section)
         {
-            srf.Close();
-            srf.Dispose();
-            string[] lines = File.ReadAllLines(file);
-            using (StreamWriter savefile = new StreamWriter(file))
-            {
-                foreach (string line in lines)
-                {
-                    savefile.WriteLine(line);
-                }
-                playlistNames.Add(name);
-                playlistSubjects.Add(subject);
-                playlistSections.Add(section);
-                savefile.WriteLine("P:" + name);
-                savefile.WriteLine("U:" + subject);
-                savefile.WriteLine("E:" + section);
-                savefile.WriteLine("|");
-            }
+            numberOfPlaylists++;
+            playlistNames.Add(name);
+            playlistSubjects.Add(subject);
+            playlistSections.Add(section);
+            saveTextFile();
         }
 
         /// <summary>
@@ -168,31 +163,11 @@ namespace StudyWizard
         public void deleteQuestion(CheckedListBox.CheckedIndexCollection questionIndices)
         {
             srf.Close();
-            srf.Dispose();
-            string[] lines = File.ReadAllLines(file);
-            string[] newLines = File.ReadAllLines(file);
-            using (StreamWriter savefile = new StreamWriter(file))
+            for (int i = 0; i < questionIndices.Count; i++)
             {
-                int index = 0;
-                foreach (string line in lines)
-                {
-                    for (int i = 0; i < questionIndices.Count; i++)
-                    {
-                        // If the current line does not contain any property of the questions that is going to be deleted, continue.
-                        if (!line.Contains(questions[questionIndices[i]].question) && !line.Contains(questions[questionIndices[i]].subject) && !line.Contains(questions[questionIndices[i]].section) && !line.Contains(questions[questionIndices[i]].answers[0]) && !line.Contains(questions[questionIndices[i]].answers[1]) && !line.Contains(questions[questionIndices[i]].answers[2]) && !line.Contains(questions[questionIndices[i]].answers[3]) && !line.Contains(Convert.ToString(questions[questionIndices[i]].correctAnswer)) && !line.Contains(questions[questionIndices[i]].explanation))
-                        {
-                            // If the current line contains a useless "|", don't write.
-                            if ((!(index == 0 && line.Contains("|"))) && (!(line.Contains("|") && (lines[index - 1].Contains("|")))))
-                            {
-                                savefile.WriteLine(line);
-                                newLines[index] = line;
-                                index++;
-                            }
-                        }
-                        questions.RemoveAt(questionIndices[i]);
-                    }
-                }
+                questions.RemoveAt(questionIndices[i]);
             }
+            saveTextFile();
         }
 
         /// <summary>
@@ -202,31 +177,10 @@ namespace StudyWizard
         public void deletePlaylist(int playlistIndex)
         {
             numberOfPlaylists--;
-            srf.Close();
-            srf.Dispose();
-            string[] lines = File.ReadAllLines(file);
-            string[] newLines = File.ReadAllLines(file);
-            using (StreamWriter savefile = new StreamWriter(file))
-            {
-                int index = 0;
-                foreach (string line in lines)
-                {
-                    // If the current line does not contain any property of the playlist that is going to be deleted, continue.
-                    if (!line.Contains(playlistNames[playlistIndex]) && !line.Contains(playlistSubjects[playlistIndex]) && !line.Contains(playlistSections[playlistIndex]))
-                    {
-                        // If the current line contains a useless "|", don't write.
-                        if ((!(index == 0 && line.Contains("|"))) && (!(line.Contains("|") && (lines[index - 1].Contains("|")))))
-                        {
-                            savefile.WriteLine(line);
-                            newLines[index] = line;
-                            index++;
-                        }
-                    }
-                }
-            }
             playlistNames.RemoveAt(playlistIndex);
             playlistSubjects.RemoveAt(playlistIndex);
             playlistSections.RemoveAt(playlistIndex);
+            saveTextFile();
         }
 
         /// <summary>
@@ -255,38 +209,21 @@ namespace StudyWizard
         /// <param name="newAnswer4">New Question Answer</param>
         /// <param name="newCorrectAnswer">New Question Correct Answer</param>
         /// <param name="newExplanation">New Question Explanation</param>
-        public void addQuestion(string newQuestion, string newSubject, string newSection, string newAnswer1, string newAnswer2, string newAnswer3, string newAnswer4, int newCorrectAnswer, string newExplanation)
+        public void addQuestion(string newQuestion, string newSubject, string newSection, 
+            string newAnswer1, string newAnswer2, string newAnswer3, string newAnswer4, 
+            int newCorrectAnswer, string newExplanation)
         {
-            srf.Close();
-            srf.Dispose();
-            string[] lines = File.ReadAllLines(file);
             string[] tempAnswers = new string[] { newAnswer1, newAnswer2, newAnswer3, newAnswer4 };
-            using (StreamWriter savefile = new StreamWriter(file))
+            questions.Add(new Questions
             {
-                foreach (string line in lines)
-                {
-                    savefile.WriteLine(line);
-                }
-                questions.Add(new Questions
-                {
-                    question = newQuestion,
-                    subject = newSubject,
-                    section = newSection,
-                    answers = tempAnswers,
-                    correctAnswer = newCorrectAnswer,
-                    explanation = newExplanation
-                });
-                savefile.WriteLine("Q:" + newQuestion);
-                savefile.WriteLine("B:" + newSubject);
-                savefile.WriteLine("C:" + newSection);
-                savefile.WriteLine("A:" + newAnswer1);
-                savefile.WriteLine("A:" + newAnswer2);
-                savefile.WriteLine("A:" + newAnswer3);
-                savefile.WriteLine("A:" + newAnswer4);
-                savefile.WriteLine("R:" + newCorrectAnswer);
-                savefile.WriteLine("_:" + newExplanation);
-                savefile.WriteLine("|");
-            }
+                question = newQuestion,
+                subject = newSubject,
+                section = newSection,
+                answers = tempAnswers,
+                correctAnswer = newCorrectAnswer,
+                explanation = newExplanation
+            });
+            saveTextFile();
         }
 
         /// <summary>
@@ -294,9 +231,9 @@ namespace StudyWizard
         /// </summary>
         /// <param name="inputString">The string to be converted into doubles</param>
         /// <returns>A List of doubles</returns>
-        public List<double> convertStringToDouble(string inputString)
+        public List<string> splitString(string inputString)
         {
-            List<double> doubles = new List<double>();
+            List<string> strings = new List<string>();
             string tempString = "";
             for (int i = 0; i < inputString.Length; i++)
             {
@@ -306,15 +243,15 @@ namespace StudyWizard
                 }
                 else
                 {
-                    doubles.Add(Convert.ToDouble(tempString));
+                    strings.Add(tempString);
                     tempString = "";
                 }
             }
             if (tempString != "")
             {
-                doubles.Add(Convert.ToDouble(tempString));
+                strings.Add(tempString);
             }
-            return doubles;
+            return strings;
         }
 
         /// <summary>
@@ -327,28 +264,25 @@ namespace StudyWizard
             List<Questions> rightQuestions = new List<Questions>();
             for (int i = 0; i < questions.Count; i++)
             {
-                if (questions[i].subject == playlistSubjects[playlistIndex])
+                if (splitString(playlistSubjects[playlistIndex]).Contains(questions[i].subject))
                 {
-                    List<double> tempList = convertStringToDouble(playlistSections[playlistIndex]);
-                    for (int j = 0; j < tempList.Count; j++)
-                    {
-                        if (Convert.ToDouble(questions[i].section) == convertStringToDouble(playlistSections[playlistIndex])[j])
-                        {
-                            rightQuestions.Add(questions[i]);
-                        }
-                    }
+                    rightQuestions.Add(questions[i]);
                 }
             }
             return rightQuestions;
         }
 
-
-        public string[] RandomizeStrings(string[] arr)
+        /// <summary>
+        /// Takes a string array and randomizes the order
+        /// </summary>
+        /// <param name="inputStringArray">String array to be randomized</param>
+        /// <returns>randomized string array</returns>
+        public string[] RandomizeStrings(string[] inputStringArray)
         {
             List<KeyValuePair<int, string>> list = new List<KeyValuePair<int, string>>();
             // Add all strings from array
             // Add new random int each time
-            foreach (string s in arr)
+            foreach (string s in inputStringArray)
             {
                 list.Add(new KeyValuePair<int, string>(random.Next(), s));
             }
@@ -357,7 +291,7 @@ namespace StudyWizard
                          orderby item.Key
                          select item;
             // Allocate new string array
-            string[] result = new string[arr.Length];
+            string[] result = new string[inputStringArray.Length];
             // Copy values to array
             int index = 0;
             foreach (KeyValuePair<int, string> pair in sorted)
