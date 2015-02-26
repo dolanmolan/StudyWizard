@@ -46,11 +46,13 @@ namespace StudyWizard
         {
             if (rdoBtn_answer1.Checked && correctAnswer == 0 || rdoBtn_answer2.Checked && correctAnswer == 1 || rdoBtn_answer3.Checked && correctAnswer == 2 || rdoBtn_answer4.Checked && correctAnswer == 3)
             {
-                DialogResult = MessageBox.Show("Correct!\n" + studyingQuestions[randomQuestion].explanation, "Correct!", MessageBoxButtons.OK, MessageBoxIcon.None);
+                MessageBox.Show("Correct!\nCorrect Answer: " + studyingQuestions[randomQuestion].answers[studyingQuestions[randomQuestion].correctAnswer] + "\n" + studyingQuestions[randomQuestion].explanation, 
+                    "Correct!", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
             else
             {
-                DialogResult = MessageBox.Show("Not Quite!\n" + studyingQuestions[randomQuestion].explanation, "Incorrect", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Not Quite!\nCorrect Answer: " + studyingQuestions[randomQuestion].answers[studyingQuestions[randomQuestion].correctAnswer] + "\n" + studyingQuestions[randomQuestion].explanation, 
+                    "Incorrect", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             randomQuestion = random.Next(studyingQuestions.Count);
             correctAnswer = addNewQuestion(randomQuestion);
