@@ -16,8 +16,6 @@ namespace StudyWizard
         public List<string> playlistSections = new List<string>();
         public BindingList<Questions> questions = new BindingList<Questions>();
         public string file;
-        StreamReader srf;
-        public int numberOfPlaylists = 0;
         static Random random = new Random();
 
 
@@ -35,64 +33,64 @@ namespace StudyWizard
             int tempQuestionCorrectAnswer = 0;
             string tempQuestionExplanation = "";
             List<string> tempQuestionAnswers = new List<string>();
-            srf = new StreamReader(file);
             string s = "";
-            while ((s = srf.ReadLine()) != null)
+            using (StreamReader streamReader = new StreamReader(file))
             {
-                switch (s[0])
+                while ((s = streamReader.ReadLine()) != null)
                 {
-                    case 'P':
-                        numberOfPlaylists++;
-                        s = s.Remove(0, 2);
-                        playlistNames.Add(s);
-                        break;
-                    case 'U':
-                        s = s.Remove(0, 2);
-                        playlistSubjects.Add(s);
-                        break;
-                    case 'E':
-                        s = s.Remove(0, 2);
-                        playlistSections.Add(s);
-                        break;
-                    case 'Q':
-                        s = s.Remove(0, 2);
-                        tempQuestion = s;
-                        break;
-                    case 'B':
-                        s = s.Remove(0, 2);
-                        tempQuestionSubject = s;
-                        break;
-                    case 'C':
-                        s = s.Remove(0, 2);
-                        tempQuestionSection = s;
-                        break;
-                    case 'A':
-                        s = s.Remove(0, 2);
-                        tempQuestionAnswers.Add(s);
-                        break;
-                    case 'R':
-                        s = s.Remove(0, 2);
-                        tempQuestionCorrectAnswer = Convert.ToInt32(s);
-                        break;
-                    case '_':
-                        s = s.Remove(0, 2);
-                        tempQuestionExplanation = s;
-                        questions.Add(new Questions
-                        {
-                            question = tempQuestion,
-                            subject = tempQuestionSubject,
-                            section = tempQuestionSection,
-                            correctAnswer = tempQuestionCorrectAnswer,
-                            explanation = tempQuestionExplanation
-                        });
-                        tempQuestionAnswers.CopyTo(0, questions[questions.Count - 1].answers, 0, 4);
-                        tempQuestionAnswers.Clear();
-                        break;
-                    default:
-                        break;
+                    switch (s[0])
+                    {
+                        case 'P':
+                            s = s.Remove(0, 2);
+                            playlistNames.Add(s);
+                            break;
+                        case 'U':
+                            s = s.Remove(0, 2);
+                            playlistSubjects.Add(s);
+                            break;
+                        case 'E':
+                            s = s.Remove(0, 2);
+                            playlistSections.Add(s);
+                            break;
+                        case 'Q':
+                            s = s.Remove(0, 2);
+                            tempQuestion = s;
+                            break;
+                        case 'B':
+                            s = s.Remove(0, 2);
+                            tempQuestionSubject = s;
+                            break;
+                        case 'C':
+                            s = s.Remove(0, 2);
+                            tempQuestionSection = s;
+                            break;
+                        case 'A':
+                            s = s.Remove(0, 2);
+                            tempQuestionAnswers.Add(s);
+                            break;
+                        case 'R':
+                            s = s.Remove(0, 2);
+                            tempQuestionCorrectAnswer = Convert.ToInt32(s);
+                            break;
+                        case '_':
+                            s = s.Remove(0, 2);
+                            tempQuestionExplanation = s;
+                            questions.Add(new Questions
+                            {
+                                question = tempQuestion,
+                                subject = tempQuestionSubject,
+                                section = tempQuestionSection,
+                                correctAnswer = tempQuestionCorrectAnswer,
+                                explanation = tempQuestionExplanation
+                            });
+                            tempQuestionAnswers.CopyTo(0, questions[questions.Count - 1].answers, 0, 4);
+                            tempQuestionAnswers.Clear();
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
-            srf.Close();
         }
 
         /// <summary>
@@ -100,27 +98,27 @@ namespace StudyWizard
         /// </summary>
         public void saveTextFile()
         {
-            using (StreamWriter savefile = new StreamWriter(file))
+            using (StreamWriter streamWriter = new StreamWriter(file))
             {
-                for (int i = 0; i < numberOfPlaylists; i++)
+                for (int i = 0; i < playlistNames.Count; i++)
                 {
-                    savefile.WriteLine("P:" + playlistNames[i]);
-                    savefile.WriteLine("U:" + playlistSubjects[i]);
-                    savefile.WriteLine("E:" + playlistSections[i]);
-                    savefile.WriteLine("|");
+                    streamWriter.WriteLine("P:" + playlistNames[i]);
+                    streamWriter.WriteLine("U:" + playlistSubjects[i]);
+                    streamWriter.WriteLine("E:" + playlistSections[i]);
+                    streamWriter.WriteLine("|");
                 }
                 for (int i = 0; i < questions.Count; i++)
                 {
-                    savefile.WriteLine("Q:" + questions[i].question);
-                    savefile.WriteLine("B:" + questions[i].subject);
-                    savefile.WriteLine("C:" + questions[i].section);
+                    streamWriter.WriteLine("Q:" + questions[i].question);
+                    streamWriter.WriteLine("B:" + questions[i].subject);
+                    streamWriter.WriteLine("C:" + questions[i].section);
                     for (int j = 0; j < 4; j++)
                     {
-                        savefile.WriteLine("A:" + questions[i].answers[j]);
+                        streamWriter.WriteLine("A:" + questions[i].answers[j]);
                     }
-                    savefile.WriteLine("R:" + questions[i].correctAnswer);
-                    savefile.WriteLine("_:" + questions[i].explanation);
-                    savefile.WriteLine("|");
+                    streamWriter.WriteLine("R:" + questions[i].correctAnswer);
+                    streamWriter.WriteLine("_:" + questions[i].explanation);
+                    streamWriter.WriteLine("|");
                 }
             }
         }
@@ -148,7 +146,6 @@ namespace StudyWizard
         /// <param name="section">Playlist Section(s)</param>
         public void saveNewPlaylist(string name, string subject, string section)
         {
-            numberOfPlaylists++;
             playlistNames.Add(name);
             playlistSubjects.Add(subject);
             playlistSections.Add(section);
@@ -174,7 +171,6 @@ namespace StudyWizard
         /// <param name="playlistIndex">index of the playlist name in the playlistNames BindingList</param>
         public void deletePlaylist(int playlistIndex)
         {
-            numberOfPlaylists--;
             playlistNames.RemoveAt(playlistIndex);
             playlistSubjects.RemoveAt(playlistIndex);
             playlistSections.RemoveAt(playlistIndex);
@@ -196,7 +192,7 @@ namespace StudyWizard
         }
 
         /// <summary>
-        /// Appends a question to the text file, as well as adds a new Questions object to the questions list.
+        /// Adds a new Question object to the questions BindingList.
         /// </summary>
         /// <param name="newQuestion">New Question</param>
         /// <param name="newSubject">New Question Subject</param>
@@ -207,7 +203,7 @@ namespace StudyWizard
         /// <param name="newAnswer4">New Question Answer</param>
         /// <param name="newCorrectAnswer">New Question Correct Answer</param>
         /// <param name="newExplanation">New Question Explanation</param>
-        public void addQuestion(string newQuestion, string newSubject, string newSection, 
+        public void saveNewQuestion(string newQuestion, string newSubject, string newSection, 
             string newAnswer1, string newAnswer2, string newAnswer3, string newAnswer4, 
             int newCorrectAnswer, string newExplanation)
         {
@@ -221,6 +217,33 @@ namespace StudyWizard
                 correctAnswer = newCorrectAnswer,
                 explanation = newExplanation
             });
+            saveTextFile();
+        }
+
+        /// <summary>
+        /// Changes the properties of a specific question, specified by the index of the question in the questions BindingList
+        /// </summary>
+        /// <param name="selectedQuestion">index of question being edited</param>
+        /// <param name="newQuestion">Question</param>
+        /// <param name="newSubject">Question Subject</param>
+        /// <param name="newSection">Question Section</param>
+        /// <param name="newAnswer1">Question Answer</param>
+        /// <param name="newAnswer2">Question Answer</param>
+        /// <param name="newAnswer3">Question Answer</param>
+        /// <param name="newAnswer4">Question Answer</param>
+        /// <param name="newCorrectAnswer">Question Correct Answer</param>
+        /// <param name="newExplanation">Question Explanation</param>
+        public void saveQuestion(int selectedQuestion, string newQuestion, string newSubject, string newSection, 
+            string newAnswer1, string newAnswer2, string newAnswer3, string newAnswer4, 
+            int newCorrectAnswer, string newExplanation)
+        {
+            string[] newAnswers = new string[] { newAnswer1, newAnswer2, newAnswer3, newAnswer4 };
+            questions[selectedQuestion].question = newQuestion;
+            questions[selectedQuestion].subject = newSubject;
+            questions[selectedQuestion].section = newSection;
+            questions[selectedQuestion].answers = newAnswers;
+            questions[selectedQuestion].correctAnswer = newCorrectAnswer;
+            questions[selectedQuestion].explanation = newExplanation;
             saveTextFile();
         }
 

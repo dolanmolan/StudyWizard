@@ -14,14 +14,12 @@ namespace StudyWizard
     {
         MainForm mainForm = new MainForm();
         PandQ pandQ = new PandQ();
-        Questions questions = new Questions();
 
-        public SelectStudyForm(MainForm myMainForm, PandQ myPlaylist, Questions myQuestions)
+        public SelectStudyForm(MainForm mainForm, PandQ pandQ)
         {
             InitializeComponent();
-            mainForm = myMainForm;
-            pandQ = myPlaylist;
-            questions = myQuestions;
+            this.mainForm = mainForm;
+            this.pandQ = pandQ;
             lsbx_StudyListBox.DataSource = pandQ.playlistNames;
         }
 

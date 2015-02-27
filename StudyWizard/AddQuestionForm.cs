@@ -16,13 +16,50 @@ namespace StudyWizard
         MainForm mainForm = new MainForm();
         PandQ pandQ = new PandQ();
         bool textFileSelected;
+        bool newQuestion;
+        int selectedQuestion;
 
-        public AddQuestionForm(MainForm myMainForm, PandQ myPandQ, bool myTextFileSelected)
+        public AddQuestionForm(MainForm mainForm, PandQ pandQ, bool textFileSelected)
         {
             InitializeComponent();
-            mainForm = myMainForm;
-            pandQ = myPandQ;
-            textFileSelected = myTextFileSelected;
+            this.mainForm = mainForm;
+            this.pandQ = pandQ;
+            this.textFileSelected = textFileSelected;
+            newQuestion = true;
+        }
+
+        public AddQuestionForm(MainForm mainForm, PandQ pandQ, bool textFileSelected, int selectedQuestion)
+        {
+            InitializeComponent();
+            this.mainForm = mainForm;
+            this.pandQ = pandQ;
+            this.textFileSelected = textFileSelected;
+            newQuestion = false;
+            this.selectedQuestion = selectedQuestion;
+            txtBox_question.Text = pandQ.questions[selectedQuestion].question;
+            txtBox_Answer1.Text = pandQ.questions[selectedQuestion].answers[0];
+            txtBox_Answer2.Text = pandQ.questions[selectedQuestion].answers[1];
+            txtBox_Answer3.Text = pandQ.questions[selectedQuestion].answers[2];
+            txtBox_Answer4.Text = pandQ.questions[selectedQuestion].answers[3];
+            txtBox_Explanation.Text = pandQ.questions[selectedQuestion].explanation;
+            txtBox_Subject.Text = pandQ.questions[selectedQuestion].subject;
+            txtBox_Sections.Text = pandQ.questions[selectedQuestion].section;
+            switch (pandQ.questions[selectedQuestion].correctAnswer)
+            {
+                case 0:
+                    rdoBtn_1.Checked = true;
+                    break;
+                case 1:
+                    rdoBtn_2.Checked = true;
+                    break;
+                case 2:
+                    rdoBtn_3.Checked = true;
+                    break;
+                case 3:
+                    rdoBtn_4.Checked = true;
+                    break;
+                default: break;
+            }
         }
 
         private void btn_done_Click(object sender, EventArgs e)
@@ -62,7 +99,7 @@ namespace StudyWizard
                 {
                     correctAnswer = 3;
                 }
-                pandQ.addQuestion(txtBox_question.Text, txtBox_Subject.Text, txtBox_Sections.Text, txtBox_Answer1.Text, txtBox_Answer2.Text, txtBox_Answer3.Text, txtBox_Answer4.Text, correctAnswer, txtBox_Explanation.Text);
+                pandQ.saveNewQuestion(txtBox_question.Text, txtBox_Subject.Text, txtBox_Sections.Text, txtBox_Answer1.Text, txtBox_Answer2.Text, txtBox_Answer3.Text, txtBox_Answer4.Text, correctAnswer, txtBox_Explanation.Text);
                 txtBox_question.Text = "";
                 txtBox_Answer1.Text = "";
                 txtBox_Answer2.Text = "";

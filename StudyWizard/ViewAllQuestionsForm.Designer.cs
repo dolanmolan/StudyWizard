@@ -63,6 +63,7 @@
             this.btn_edit.TabIndex = 3;
             this.btn_edit.Text = "Edit";
             this.btn_edit.UseVisualStyleBackColor = true;
+            this.btn_edit.Click += new System.EventHandler(this.btn_edit_Click);
             // 
             // chdlsbx_questions
             // 

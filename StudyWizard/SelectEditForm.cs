@@ -17,13 +17,13 @@ namespace StudyWizard
         PandQ pandQ = new PandQ();
         bool textFileSelected;
 
-        public SelectEditForm(MainForm myMainForm, PandQ myPandQ, bool myTextFileSelected)
+        public SelectEditForm(MainForm mainForm, PandQ pandQ, bool textFileSelected)
         {
             InitializeComponent();
-            mainForm = myMainForm;
-            pandQ = myPandQ;
+            this.mainForm = mainForm;
+            this.pandQ = pandQ;
             lsbx_EditListBox.DataSource = pandQ.playlistNames;
-            textFileSelected = myTextFileSelected;
+            this.textFileSelected = textFileSelected;
         }
 
         private void btn_edit_Click(object sender, EventArgs e)

@@ -13,9 +13,7 @@ namespace StudyWizard
 {
     public partial class MainForm : Form
     {
-        OpenFileDialog openFileDialog = new OpenFileDialog();
         PandQ pandQ = new PandQ();
-        Questions questions = new Questions();
         public bool textFileSelected = false;
         
         public MainForm()
@@ -27,7 +25,7 @@ namespace StudyWizard
         {
             if (textFileSelected)
             {
-                SelectStudyForm selectStudyForm = new SelectStudyForm(this, pandQ, questions);
+                SelectStudyForm selectStudyForm = new SelectStudyForm(this, pandQ);
                 selectStudyForm.Show();
                 this.Hide();
             }
@@ -42,7 +40,7 @@ namespace StudyWizard
         {
             SelectEditForm selectEditForm = new SelectEditForm(this, pandQ, textFileSelected);
             selectEditForm.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void btn_close_Click(object sender, EventArgs e)
@@ -52,6 +50,7 @@ namespace StudyWizard
 
         private void btn_load_Click(object sender, EventArgs e)
         {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = "c:\\";
             openFileDialog.Filter = "txt files (*.txt)|*.txt";
             openFileDialog.FilterIndex = 2;

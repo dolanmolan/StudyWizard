@@ -16,13 +16,13 @@ namespace StudyWizard
         PandQ pandQ = new PandQ();
         bool textFileSelected;
 
-        public ViewAllQuestionsForm(MainForm myMainForm, PandQ myPlaylist, bool myTextFileSelected)
+        public ViewAllQuestionsForm(MainForm mainForm, PandQ pandQ, bool textFileSelected)
         {
             InitializeComponent();
-            mainForm = myMainForm;
-            pandQ = myPlaylist;
+            this.mainForm = mainForm;
+            this.pandQ = pandQ;
+            this.textFileSelected = textFileSelected;
             chdlsbx_questions.DataSource = pandQ.viewAllQuestions();
-            textFileSelected = myTextFileSelected;
         }
 
         private void btn_back_Click(object sender, EventArgs e)
@@ -37,6 +37,11 @@ namespace StudyWizard
             pandQ.deleteQuestion(chdlsbx_questions.CheckedIndices);
             chdlsbx_questions.ClearSelected();
             chdlsbx_questions.DataSource = pandQ.viewAllQuestions();
+        }
+
+        private void btn_edit_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
