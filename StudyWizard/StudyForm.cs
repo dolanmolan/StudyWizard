@@ -13,17 +13,15 @@ namespace StudyWizard
     public partial class StudyForm : Form
     {
         Random random = new Random();
-        MainForm mainForm = new MainForm();
         PandQ pandQ = new PandQ();
         List<Questions> studyingQuestions = new List<Questions>();
         int selectedPlaylist;
         int correctAnswer;
         int randomQuestion;
 
-        public StudyForm(MainForm mainForm, PandQ pandQ, int selectedPlaylist)
+        public StudyForm(PandQ pandQ, int selectedPlaylist)
         {
             InitializeComponent();
-            this.mainForm = mainForm;
             this.pandQ = pandQ;
             this.selectedPlaylist = selectedPlaylist;
             studyingQuestions = pandQ.findQuestions(selectedPlaylist);
@@ -36,6 +34,7 @@ namespace StudyWizard
             DialogResult dialogResult = MessageBox.Show("Are you sure you want to quit?", "Quit?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.Yes)
             {
+                MainForm mainForm = new MainForm(pandQ);
                 mainForm.Show();
                 this.Close();
             }
