@@ -13,14 +13,16 @@ namespace StudyWizard
     public partial class AddQuestionForm : Form
     {
         DialogResult dialogResult = new DialogResult();
+        MainForm mainForm = new MainForm();
         PandQ pandQ = new PandQ();
         bool textFileSelected;
         bool newQuestion;
         int selectedQuestion;
 
-        public AddQuestionForm(PandQ pandQ, bool textFileSelected)
+        public AddQuestionForm(MainForm mainForm, PandQ pandQ, bool textFileSelected)
         {
             InitializeComponent();
+            this.mainForm = mainForm;
             this.pandQ = pandQ;
             this.textFileSelected = textFileSelected;
             newQuestion = true;
@@ -29,6 +31,7 @@ namespace StudyWizard
         public AddQuestionForm(MainForm mainForm, PandQ pandQ, bool textFileSelected, int selectedQuestion)
         {
             InitializeComponent();
+            this.mainForm = mainForm;
             this.pandQ = pandQ;
             this.textFileSelected = textFileSelected;
             newQuestion = false;
@@ -65,7 +68,7 @@ namespace StudyWizard
             if (dialogResult == DialogResult.Yes)
             {
                 this.Close();
-                SelectEditForm selectEditForm = new SelectEditForm(pandQ, textFileSelected);
+                SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ, textFileSelected);
                 selectEditForm.Show();
             }
         }

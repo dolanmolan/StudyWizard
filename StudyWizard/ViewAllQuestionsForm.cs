@@ -12,12 +12,14 @@ namespace StudyWizard
 {
     public partial class ViewAllQuestionsForm : Form
     {
+        MainForm mainForm = new MainForm();
         PandQ pandQ = new PandQ();
         bool textFileSelected;
 
-        public ViewAllQuestionsForm(PandQ pandQ, bool textFileSelected)
+        public ViewAllQuestionsForm(MainForm mainForm, PandQ pandQ, bool textFileSelected)
         {
             InitializeComponent();
+            this.mainForm = mainForm;
             this.pandQ = pandQ;
             this.textFileSelected = textFileSelected;
             chdlsbx_questions.DataSource = pandQ.viewAllQuestions();
@@ -25,7 +27,7 @@ namespace StudyWizard
 
         private void btn_back_Click(object sender, EventArgs e)
         {
-            SelectEditForm selectEditForm = new SelectEditForm(pandQ, textFileSelected);
+            SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ, textFileSelected);
             selectEditForm.Show();
             this.Close();
         }

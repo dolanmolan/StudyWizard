@@ -13,22 +13,25 @@ namespace StudyWizard
 {
     public partial class EditForm : Form
     {
+        MainForm mainForm = new MainForm();
         PandQ pandQ = new PandQ();
         int selectedPlaylist;
         bool newPlaylist;
         bool textFileSelected;
 
-        public EditForm(PandQ pandQ, bool textFileSelected)
+        public EditForm(MainForm mainForm, PandQ pandQ, bool textFileSelected)
         {
             InitializeComponent();
+            this.mainForm = mainForm;
             this.pandQ = pandQ;
             this.textFileSelected = textFileSelected;
             newPlaylist = true;
         }
 
-        public EditForm(PandQ pandQ, int selectedPlaylist, bool textFileSelected)
+        public EditForm(MainForm mainForm, PandQ pandQ, int selectedPlaylist, bool textFileSelected)
         {
             InitializeComponent();
+            this.mainForm = mainForm;
             this.pandQ = pandQ;
             this.selectedPlaylist = selectedPlaylist;
             this.textFileSelected = textFileSelected;
@@ -43,7 +46,7 @@ namespace StudyWizard
             DialogResult dialogResult = MessageBox.Show("Are you sure you want to cancel?", "Cancel?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.Yes)
             {
-                SelectEditForm selectEditForm = new SelectEditForm(pandQ, textFileSelected);
+                SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ, textFileSelected);
                 selectEditForm.Show();
                 this.Close();
             }
@@ -84,7 +87,7 @@ namespace StudyWizard
                 }
                 pandQ.savePlaylist(selectedPlaylist, txtBox_playlistName.Text, txtBox_subject.Text, txtBox_Sections.Text);
             }
-            SelectEditForm selectEditForm = new SelectEditForm(pandQ, textFileSelected);
+            SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ, textFileSelected);
             selectEditForm.Show();
             this.Close();
         }

@@ -21,16 +21,11 @@ namespace StudyWizard
             InitializeComponent();
         }
 
-        public MainForm(PandQ pandQ)
-        {
-            this.pandQ = pandQ;
-        }
-
         private void btn_study_Click(object sender, EventArgs e)
         {
             if (textFileSelected)
             {
-                SelectStudyForm selectStudyForm = new SelectStudyForm(pandQ);
+                SelectStudyForm selectStudyForm = new SelectStudyForm(this, pandQ);
                 selectStudyForm.Show();
                 this.Hide();
             }
@@ -43,7 +38,7 @@ namespace StudyWizard
 
         public void btn_edit_Click(object sender, EventArgs e)
         {
-            SelectEditForm selectEditForm = new SelectEditForm(pandQ, textFileSelected);
+            SelectEditForm selectEditForm = new SelectEditForm(this, pandQ, textFileSelected);
             selectEditForm.Show();
             this.Close();
         }

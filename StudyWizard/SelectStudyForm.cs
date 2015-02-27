@@ -12,25 +12,26 @@ namespace StudyWizard
 {
     public partial class SelectStudyForm : Form
     {
+        MainForm mainForm = new MainForm();
         PandQ pandQ = new PandQ();
 
-        public SelectStudyForm(PandQ pandQ)
+        public SelectStudyForm(MainForm mainForm, PandQ pandQ)
         {
             InitializeComponent();
+            this.mainForm = mainForm;
             this.pandQ = pandQ;
             lsbx_StudyListBox.DataSource = pandQ.playlistNames;
         }
 
         private void btn_back_Click(object sender, EventArgs e)
         {
-            MainForm mainForm = new MainForm(pandQ);
             mainForm.Show();
             this.Close();
         }
 
         private void btn_study_Click(object sender, EventArgs e)
         {
-            StudyForm studyForm = new StudyForm(pandQ, lsbx_StudyListBox.SelectedIndex);
+            StudyForm studyForm = new StudyForm(mainForm, pandQ, lsbx_StudyListBox.SelectedIndex);
             studyForm.Show();
             this.Close();
         }

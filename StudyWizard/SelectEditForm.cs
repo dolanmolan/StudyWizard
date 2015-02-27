@@ -13,12 +13,14 @@ namespace StudyWizard
 {
     public partial class SelectEditForm : Form
     {
+        MainForm mainForm = new MainForm();
         PandQ pandQ = new PandQ();
         bool textFileSelected;
 
-        public SelectEditForm(PandQ pandQ, bool textFileSelected)
+        public SelectEditForm(MainForm mainForm, PandQ pandQ, bool textFileSelected)
         {
             InitializeComponent();
+            this.mainForm = mainForm;
             this.pandQ = pandQ;
             lsbx_EditListBox.DataSource = pandQ.playlistNames;
             this.textFileSelected = textFileSelected;
@@ -26,14 +28,13 @@ namespace StudyWizard
 
         private void btn_edit_Click(object sender, EventArgs e)
         {
-            EditForm editForm = new EditForm(pandQ, lsbx_EditListBox.SelectedIndex, textFileSelected);
+            EditForm editForm = new EditForm(mainForm, pandQ, lsbx_EditListBox.SelectedIndex, textFileSelected);
             editForm.Show();
             this.Close();
         }
 
         private void btn_back_Click(object sender, EventArgs e)
         {
-            MainForm mainForm = new MainForm(pandQ);
             mainForm.Show();
             mainForm.textFileSelected = textFileSelected;
             this.Close();
@@ -47,21 +48,21 @@ namespace StudyWizard
 
         private void btn_viewAll_Click(object sender, EventArgs e)
         {
-            ViewAllQuestionsForm viewAllQuestionsForm = new ViewAllQuestionsForm(pandQ, textFileSelected);
+            ViewAllQuestionsForm viewAllQuestionsForm = new ViewAllQuestionsForm(mainForm, pandQ, textFileSelected);
             viewAllQuestionsForm.Show();
             this.Close();
         }
 
         private void btn_addQuestion_Click(object sender, EventArgs e)
         {
-            AddQuestionForm addQuestionForm = new AddQuestionForm(pandQ, textFileSelected);
+            AddQuestionForm addQuestionForm = new AddQuestionForm(mainForm, pandQ, textFileSelected);
             addQuestionForm.Show();
             this.Close();
         }
 
         private void btn_newPlaylist_Click(object sender, EventArgs e)
         {
-            EditForm editForm = new EditForm(pandQ, textFileSelected);
+            EditForm editForm = new EditForm(mainForm, pandQ, textFileSelected);
             editForm.Show();
             this.Close();
         }
