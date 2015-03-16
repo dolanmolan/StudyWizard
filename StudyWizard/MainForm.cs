@@ -40,7 +40,7 @@ namespace StudyWizard
         {
             SelectEditForm selectEditForm = new SelectEditForm(this, pandQ, textFileSelected);
             selectEditForm.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void btn_close_Click(object sender, EventArgs e)
