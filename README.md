@@ -57,3 +57,7 @@ _:Explanation
 ```
 
 "|" are usually used to separate playlists and questions just for organization
+
+##License
+
+StudyWizard is released under the GNU General Public License. See LICENSE for details.
