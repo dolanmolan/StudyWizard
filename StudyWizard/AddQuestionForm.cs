@@ -15,25 +15,22 @@ namespace StudyWizard
         DialogResult dialogResult = new DialogResult();
         MainForm mainForm = new MainForm();
         PandQ pandQ = new PandQ();
-        bool textFileSelected;
         bool newQuestion;
         int selectedQuestion;
 
-        public AddQuestionForm(MainForm mainForm, PandQ pandQ, bool textFileSelected)
+        public AddQuestionForm(MainForm mainForm, PandQ pandQ)
         {
             InitializeComponent();
             this.mainForm = mainForm;
             this.pandQ = pandQ;
-            this.textFileSelected = textFileSelected;
             newQuestion = true;
         }
 
-        public AddQuestionForm(MainForm mainForm, PandQ pandQ, bool textFileSelected, int selectedQuestion)
+        public AddQuestionForm(MainForm mainForm, PandQ pandQ, int selectedQuestion)
         {
             InitializeComponent();
             this.mainForm = mainForm;
             this.pandQ = pandQ;
-            this.textFileSelected = textFileSelected;
             newQuestion = false;
             this.selectedQuestion = selectedQuestion;
             txtBox_question.Text = pandQ.questions[selectedQuestion].question;
@@ -68,7 +65,7 @@ namespace StudyWizard
             if (dialogResult == DialogResult.Yes)
             {
                 this.Close();
-                SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ, textFileSelected);
+                SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ);
                 selectEditForm.Show();
             }
         }

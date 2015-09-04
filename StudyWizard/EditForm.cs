@@ -17,24 +17,21 @@ namespace StudyWizard
         PandQ pandQ = new PandQ();
         int selectedPlaylist;
         bool newPlaylist;
-        bool textFileSelected;
 
-        public EditForm(MainForm mainForm, PandQ pandQ, bool textFileSelected)
+        public EditForm(MainForm mainForm, PandQ pandQ)
         {
             InitializeComponent();
             this.mainForm = mainForm;
             this.pandQ = pandQ;
-            this.textFileSelected = textFileSelected;
             newPlaylist = true;
         }
 
-        public EditForm(MainForm mainForm, PandQ pandQ, int selectedPlaylist, bool textFileSelected)
+        public EditForm(MainForm mainForm, PandQ pandQ, int selectedPlaylist)
         {
             InitializeComponent();
             this.mainForm = mainForm;
             this.pandQ = pandQ;
             this.selectedPlaylist = selectedPlaylist;
-            this.textFileSelected = textFileSelected;
             txtBox_playlistName.Text = pandQ.playlistNames[selectedPlaylist];
             txtBox_subject.Text = pandQ.playlistSubjects[selectedPlaylist];
             txtBox_Sections.Text = pandQ.playlistSections[selectedPlaylist];
@@ -46,7 +43,7 @@ namespace StudyWizard
             DialogResult dialogResult = MessageBox.Show("Are you sure you want to cancel?", "Cancel?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.Yes)
             {
-                SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ, textFileSelected);
+                SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ);
                 selectEditForm.Show();
                 this.Close();
             }
@@ -69,7 +66,7 @@ namespace StudyWizard
             }
             else
             {
-                if (!textFileSelected)
+                if (pandQ.file == null)
                 {
                     Stream stream;
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -80,14 +77,13 @@ namespace StudyWizard
                         if ((stream = saveFileDialog.OpenFile()) != null)
                         {
                             pandQ.file = saveFileDialog.FileName;
-                            textFileSelected = true;
                             stream.Close();
                         }
                     }
                 }
                 pandQ.savePlaylist(selectedPlaylist, txtBox_playlistName.Text, txtBox_subject.Text, txtBox_Sections.Text);
             }
-            SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ, textFileSelected);
+            SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ);
             selectEditForm.Show();
             this.Close();
         }

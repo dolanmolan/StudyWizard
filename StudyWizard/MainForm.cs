@@ -14,7 +14,6 @@ namespace StudyWizard
     public partial class MainForm : Form
     {
         PandQ pandQ = new PandQ();
-        public bool textFileSelected = false;
         
         public MainForm()
         {
@@ -23,7 +22,7 @@ namespace StudyWizard
 
         private void btn_study_Click(object sender, EventArgs e)
         {
-            if (textFileSelected)
+            if (pandQ.file != null)
             {
                 SelectStudyForm selectStudyForm = new SelectStudyForm(this, pandQ);
                 selectStudyForm.Show();
@@ -38,7 +37,7 @@ namespace StudyWizard
 
         public void btn_edit_Click(object sender, EventArgs e)
         {
-            SelectEditForm selectEditForm = new SelectEditForm(this, pandQ, textFileSelected);
+            SelectEditForm selectEditForm = new SelectEditForm(this, pandQ);
             selectEditForm.Show();
             this.Hide();
         }
@@ -62,7 +61,6 @@ namespace StudyWizard
                 string file = openFileDialog.FileName;
                 pandQ.file = file;
                 pandQ.loadTextFile();
-                textFileSelected = true;
             }
             catch { }
         }

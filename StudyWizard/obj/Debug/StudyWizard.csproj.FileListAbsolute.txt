@@ -13,3 +13,18 @@ C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj
 C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.StudyForm.resources
 C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.ViewAllQuestionsForm.resources
 C:\Users\Dylan\documents\visual studio 2013\Projects\StudyWizard\StudyWizard\obj\Debug\StudyWizard.csproj.GenerateResource.Cache
+C:\Users\dylan\Documents\GitHub\StudyWizard\StudyWizard\bin\Debug\StudyWizard.exe.config
+C:\Users\dylan\Documents\GitHub\StudyWizard\StudyWizard\obj\Debug\StudyWizard.exe
+C:\Users\dylan\Documents\GitHub\StudyWizard\StudyWizard\obj\Debug\StudyWizard.pdb
+C:\Users\dylan\Documents\GitHub\StudyWizard\StudyWizard\bin\Debug\StudyWizard.exe
+C:\Users\dylan\Documents\GitHub\StudyWizard\StudyWizard\bin\Debug\StudyWizard.pdb
+C:\Users\dylan\Documents\GitHub\StudyWizard\StudyWizard\obj\Debug\StudyWizard.csprojResolveAssemblyReference.cache
+C:\Users\dylan\Documents\GitHub\StudyWizard\StudyWizard\obj\Debug\StudyWizard.AddQuestionForm.resources
+C:\Users\dylan\Documents\GitHub\StudyWizard\StudyWizard\obj\Debug\StudyWizard.EditForm.resources
+C:\Users\dylan\Documents\GitHub\StudyWizard\StudyWizard\obj\Debug\StudyWizard.SelectEditForm.resources
+C:\Users\dylan\Documents\GitHub\StudyWizard\StudyWizard\obj\Debug\StudyWizard.MainForm.resources
+C:\Users\dylan\Documents\GitHub\StudyWizard\StudyWizard\obj\Debug\StudyWizard.Properties.Resources.resources
+C:\Users\dylan\Documents\GitHub\StudyWizard\StudyWizard\obj\Debug\StudyWizard.SelectStudyForm.resources
+C:\Users\dylan\Documents\GitHub\StudyWizard\StudyWizard\obj\Debug\StudyWizard.StudyForm.resources
+C:\Users\dylan\Documents\GitHub\StudyWizard\StudyWizard\obj\Debug\StudyWizard.ViewAllQuestionsForm.resources
+C:\Users\dylan\Documents\GitHub\StudyWizard\StudyWizard\obj\Debug\StudyWizard.csproj.GenerateResource.Cache
