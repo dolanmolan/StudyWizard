@@ -43,9 +43,7 @@ namespace StudyWizard
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            // If a playlist is not selected, lsbx_EditListBox.SelectedIndex = -1. So, check if a playlist is selected. If one is, delete it.
-            if (lsbx_EditListBox.SelectedIndex != -1) pandQ.deletePlaylist(lsbx_EditListBox.SelectedIndex);
-            // Clear the selected index
+            pandQ.deletePlaylist(lsbx_EditListBox.SelectedIndex);
             lsbx_EditListBox.ClearSelected();
         }
 
