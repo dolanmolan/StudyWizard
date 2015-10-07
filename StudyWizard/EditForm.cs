@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 
 namespace StudyWizard
 {
@@ -60,29 +59,11 @@ namespace StudyWizard
             {
                 MessageBox.Show("Please make sure you are entering in the sections correctly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
             if (newPlaylist)
-            {
-                pandQ.saveNewPlaylist(txtBox_playlistName.Text, txtBox_subject.Text, txtBox_Sections.Text);
-            }
-            else
-            {
-                if (pandQ.file == null)
-                {
-                    Stream stream;
-                    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    saveFileDialog.Filter = "txt files (*.txt)|*.txt";
-                    saveFileDialog.FilterIndex = 2;
-                    saveFileDialog.RestoreDirectory = true; if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        if ((stream = saveFileDialog.OpenFile()) != null)
-                        {
-                            pandQ.file = saveFileDialog.FileName;
-                            stream.Close();
-                        }
-                    }
-                }
-                pandQ.savePlaylist(selectedPlaylist, txtBox_playlistName.Text, txtBox_subject.Text, txtBox_Sections.Text);
-            }
+            { pandQ.saveNewPlaylist(txtBox_playlistName.Text, txtBox_subject.Text, txtBox_Sections.Text); }else
+            { pandQ.savePlaylist(selectedPlaylist, txtBox_playlistName.Text, txtBox_subject.Text, txtBox_Sections.Text); }
+
             SelectEditForm selectEditForm = new SelectEditForm(mainForm, pandQ);
             selectEditForm.Show();
             this.Close();

@@ -96,7 +96,9 @@ namespace StudyWizard
                 {
                     correctAnswer = 3;
                 }
+
                 pandQ.saveNewQuestion(txtBox_question.Text, txtBox_Subject.Text, txtBox_Sections.Text, txtBox_Answer1.Text, txtBox_Answer2.Text, txtBox_Answer3.Text, txtBox_Answer4.Text, correctAnswer, txtBox_Explanation.Text);
+
                 txtBox_question.Text = "";
                 txtBox_Answer1.Text = "";
                 txtBox_Answer2.Text = "";

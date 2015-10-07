@@ -98,6 +98,24 @@ namespace StudyWizard
         /// </summary>
         public void saveTextFile()
         {
+            // Check if there is a file path
+            if (this.file == null)
+            {
+                Stream stream;
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "txt files (*.txt)|*.txt";
+                saveFileDialog.FilterIndex = 2;
+                saveFileDialog.RestoreDirectory = true;
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Check if there is a file name to save to in the SaveFileDialog
+                    if ((stream = saveFileDialog.OpenFile()) != null)
+                    {
+                        this.file = saveFileDialog.FileName;
+                        stream.Close();
+                    }
+                }
+            }
             using (StreamWriter streamWriter = new StreamWriter(file))
             {
                 for (int i = 0; i < playlistNames.Count; i++)

@@ -32,9 +32,12 @@ namespace StudyWizard
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            pandQ.deleteQuestion(chdlsbx_questions.CheckedIndices);
-            chdlsbx_questions.ClearSelected();
-            chdlsbx_questions.DataSource = pandQ.viewAllQuestions();
+            if (chdlsbx_questions.CheckedIndices == null)
+            {
+                pandQ.deleteQuestion(chdlsbx_questions.CheckedIndices);
+                chdlsbx_questions.ClearSelected();
+                chdlsbx_questions.DataSource = pandQ.viewAllQuestions();
+            }
         }
 
         private void btn_edit_Click(object sender, EventArgs e)
