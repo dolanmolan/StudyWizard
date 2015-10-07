@@ -26,13 +26,9 @@ namespace StudyWizard
 
         private void btn_edit_Click(object sender, EventArgs e)
         {
-            // If a playlist is not selected, lsbx_EditListBox.SelectedIndex = -1. So, check if a playlist is selected. If one is, open up EditForm with the data from the selected index.
-            if (lsbx_EditListBox.SelectedIndex != -1)
-            {
-                EditForm editForm = new EditForm(mainForm, pandQ, lsbx_EditListBox.SelectedIndex);
-                editForm.Show();
-                this.Close();
-            }
+            EditForm editForm = new EditForm(mainForm, pandQ, lsbx_EditListBox.SelectedIndex);
+            editForm.Show();
+            this.Close();
         }
 
         private void btn_back_Click(object sender, EventArgs e)
