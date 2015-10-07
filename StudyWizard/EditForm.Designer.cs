@@ -126,6 +126,8 @@
             this.Controls.Add(this.lbl_Subject);
             this.Controls.Add(this.txtBox_playlistName);
             this.Controls.Add(this.lbl_playlistName);
+            this.MaximumSize = new System.Drawing.Size(402, 177);
+            this.MinimumSize = new System.Drawing.Size(402, 177);
             this.Name = "EditForm";
             this.Text = "Edit";
             this.ResumeLayout(false);

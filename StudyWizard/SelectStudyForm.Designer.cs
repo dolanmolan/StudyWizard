@@ -73,6 +73,8 @@
             this.Controls.Add(this.btn_back);
             this.Controls.Add(this.btn_study);
             this.Controls.Add(this.lsbx_StudyListBox);
+            this.MaximumSize = new System.Drawing.Size(300, 300);
+            this.MinimumSize = new System.Drawing.Size(300, 300);
             this.Name = "SelectStudyForm";
             this.Text = "Choose a playlist";
             this.ResumeLayout(false);

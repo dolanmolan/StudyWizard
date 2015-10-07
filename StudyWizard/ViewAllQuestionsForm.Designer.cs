@@ -89,7 +89,9 @@
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_back);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(405, 300);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(405, 300);
             this.Name = "ViewAllQuestionsForm";
             this.ShowIcon = false;
             this.Text = "Questions";

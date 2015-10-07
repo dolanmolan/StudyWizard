@@ -122,6 +122,8 @@
             this.Controls.Add(this.btn_edit);
             this.Controls.Add(this.btn_newPlaylist);
             this.Controls.Add(this.lsbx_EditListBox);
+            this.MaximumSize = new System.Drawing.Size(300, 300);
+            this.MinimumSize = new System.Drawing.Size(300, 300);
             this.Name = "SelectEditForm";
             this.Text = "Edit";
             this.ResumeLayout(false);

@@ -50,6 +50,8 @@
             // btn_edit
             // 
             this.btn_edit.Location = new System.Drawing.Point(12, 197);
+            this.btn_edit.MaximumSize = new System.Drawing.Size(125, 23);
+            this.btn_edit.MinimumSize = new System.Drawing.Size(125, 23);
             this.btn_edit.Name = "btn_edit";
             this.btn_edit.Size = new System.Drawing.Size(125, 23);
             this.btn_edit.TabIndex = 1;
@@ -88,7 +90,7 @@
             this.btn_load.UseVisualStyleBackColor = true;
             this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
             // 
-            // OpeningForm
+            // MainForm
             // 
             this.AcceptButton = this.btn_study;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -102,7 +104,9 @@
             this.Controls.Add(this.btn_study);
             this.Controls.Add(this.btn_edit);
             this.Controls.Add(this.label1);
-            this.Name = "OpeningForm";
+            this.MaximumSize = new System.Drawing.Size(300, 300);
+            this.MinimumSize = new System.Drawing.Size(300, 300);
+            this.Name = "MainForm";
             this.Text = "StudyWizard";
             this.ResumeLayout(false);
             this.PerformLayout();

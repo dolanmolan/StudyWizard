@@ -130,6 +130,8 @@
             this.Controls.Add(this.rdoBtn_answer2);
             this.Controls.Add(this.rdoBtn_answer1);
             this.Controls.Add(this.txtBox_question);
+            this.MaximumSize = new System.Drawing.Size(640, 351);
+            this.MinimumSize = new System.Drawing.Size(640, 351);
             this.Name = "StudyForm";
             this.Text = "StudyForm";
             this.ResumeLayout(false);

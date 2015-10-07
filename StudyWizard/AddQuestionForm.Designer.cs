@@ -297,6 +297,8 @@
             this.Controls.Add(this.lbl_answer1);
             this.Controls.Add(this.txtBox_question);
             this.Controls.Add(this.lbl_question);
+            this.MaximumSize = new System.Drawing.Size(722, 475);
+            this.MinimumSize = new System.Drawing.Size(722, 475);
             this.Name = "AddQuestionForm";
             this.Text = "Add A Question";
             this.ResumeLayout(false);
