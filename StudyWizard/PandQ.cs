@@ -106,6 +106,7 @@ namespace StudyWizard
                 saveFileDialog.Filter = "txt files (*.txt)|*.txt";
                 saveFileDialog.FilterIndex = 2;
                 saveFileDialog.RestoreDirectory = true;
+                // If "Save" is clicked, save at the file path selected. If "cancel" was selected, return.
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     // Check if there is a file name to save to in the SaveFileDialog
@@ -114,7 +115,7 @@ namespace StudyWizard
                         this.file = saveFileDialog.FileName;
                         stream.Close();
                     }
-                }
+                } else { return; }
             }
             using (StreamWriter streamWriter = new StreamWriter(file))
             {
