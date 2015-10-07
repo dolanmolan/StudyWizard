@@ -139,5 +139,6 @@
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Button btn_back;
         public System.Windows.Forms.ListBox lsbx_EditListBox;
+
     }
 }
